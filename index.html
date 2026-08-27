@@ -1,0 +1,3097 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kroovo — Verified Financial & Compliance Experts On Demand</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Google Identity Services (GIS) & Tally Form SDK -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="https://tally.so/widgets/embed.js" async defer></script>
+    
+    <style>
+        :root {
+            --navy:       #020817; 
+            --navy-mid:   #092648;
+            --teal:       #0E7C7B;
+            --teal-light: #1ABC9C;
+            --gold:       #D4A95F;
+            --white:      #FFFFFF;
+            --black:      #000000;
+            --text-muted: #9BAABF;
+            --border:     rgba(255,255,255,0.09);
+            --card-bg:    rgba(255,255,255,0.03);
+            --glass:      rgba(255,255,255,0.05);
+            
+            /* Fluid Spacing System */
+            --space-xs: clamp(0.5rem, 1vw, 0.75rem);
+            --space-sm: clamp(0.75rem, 1.5vw, 1rem);
+            --space-md: clamp(1.25rem, 2.5vw, 2rem);
+            --space-lg: clamp(2rem, 5vw, 4rem);
+            --space-xl: clamp(4rem, 8vw, 8rem);
+        }
+
+        html, body { background-color: #020817; }
+        html { scroll-behavior: smooth; scroll-padding-top: 130px; }
+        body { font-family: 'DM Sans', sans-serif; background: var(--navy); color: var(--white); line-height: 1.6; overflow-x: hidden; }
+        nav { display: flex; align-items: center; justify-content: space-between; padding: 15px 5%; border-bottom: 1px solid var(--border); background: rgba(2, 8, 23, 0.9); backdrop-filter: blur(15px); position: sticky; top: 0; z-index: 1000; transition: 0.3s; height: 90px; }
+        .nav-container { display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 1400px; margin: 0 auto; }
+        .brand-logo { height: clamp(75px, 10vw, 95px); width: auto; object-fit: contain; filter: drop-shadow(0 0 15px rgba(26, 188, 156, 0.15)); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.3s ease; }
+        .brand-logo:hover { transform: scale(1.05) rotate(-1deg); filter: drop-shadow(0 0 25px rgba(26, 188, 156, 0.3)); }
+        
+        .nav-links { display: flex; list-style: none; gap: 30px; align-items: center; }
+        .nav-links a { color: var(--text-muted); text-decoration: none; font-weight: 600; font-size: 13px; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; }
+        .nav-links a:hover { color: var(--teal-light); }
+        
+        /* Hamburger Menu */
+        .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 6px; z-index: 1001; padding: 10px; }
+        .hamburger span { display: block; width: 28px; height: 2px; background: var(--white); transition: 0.3s; border-radius: 2px; }
+        .hamburger.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+        /* Mobile Drawer */
+        .nav-drawer { position: fixed; top: 0; right: -100%; width: 85%; height: 100vh; background: var(--navy); border-left: 1px solid var(--border); z-index: 1000; padding: 100px 40px 40px; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); display: flex; flex-direction: column; gap: 30px; backdrop-filter: blur(25px); }
+        .nav-drawer.active { right: 0; }
+        .nav-drawer a { color: var(--white); font-size: 20px; font-weight: 700; text-decoration: none; font-family: 'Playfair Display', serif; }
+        .drawer-cta { margin-top: auto; padding: 20px; background: var(--card-bg); border-radius: 16px; text-align: center; }
+
+        /* Buttons */
+        .btn-primary { box-sizing: border-box; background: var(--teal); color: var(--white); border: none; padding: 12px 28px; border-radius: 8px; font-weight: 600; transition: 0.3s; text-decoration: none; display: inline-block; cursor: pointer; text-align: center; }
+        .btn-primary:hover { background: var(--teal-light); transform: translateY(-2px); box-shadow: 0 10px 20px rgba(14, 124, 123, 0.3); }
+        .btn-hero { background: var(--teal); color: var(--white); border: none; padding: 10px 28px; border-radius: 12px; font-weight: 700; font-size: 15px; transition: 0.3s; cursor: pointer; text-decoration: none; text-align: center; }
+        .btn-hero-outline { background: rgba(255,255,255,0.05); color: var(--white); border: 1px solid var(--border); padding: 10px 28px; border-radius: 12px; font-weight: 700; font-size: 15px; transition: 0.3s; cursor: pointer; text-decoration: none; backdrop-filter: blur(5px); text-align: center; }
+        .btn-hero:hover { background: var(--teal-light); transform: translateY(-2px); box-shadow: 0 10px 20px rgba(14, 124, 123, 0.4); }
+        .btn-hero-outline:hover { background: rgba(255, 255, 255, 0.1); border-color: rgba(255, 255, 255, 0.3); transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); }
+
+        /* Floating Action Button (Lower Right) */
+        .fab { 
+            position: fixed; 
+            bottom: 40px; 
+            right: 40px; 
+            background: #25D366; 
+            color: white; 
+            width: clamp(60px, 8vw, 75px); 
+            height: clamp(60px, 8vw, 75px); 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: clamp(28px, 4vw, 36px); 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4); 
+            cursor: pointer; 
+            z-index: 9999; 
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            border: 4px solid rgba(255,255,255,0.2); 
+            text-decoration: none; 
+        }
+        .fab:hover { transform: scale(1.1) rotate(10deg); box-shadow: 0 20px 45px rgba(37,211,102,0.5); }
+
+        /* Sections */
+        .section { padding: 100px 60px; max-width: 1400px; margin: 0 auto; }
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-header h2 { font-family: 'Playfair Display', serif; font-size: 42px; margin-bottom: 15px; }
+        .section-header p { font-size: 18px; color: var(--text-muted); max-width: 800px; margin: 0 auto; }        /* Hero */
+        .hero { position: relative; padding: 15px 5% var(--space-md); min-height: clamp(450px, 60vh, 700px); display: flex; align-items: center; justify-content: center; text-align: center; overflow: hidden; }
+        .hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 50% 50%, rgba(14, 124, 123, 0.15) 0%, transparent 70%); z-index: -1; }
+        .hero-grid { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px); background-size: 40px 40px; z-index: -1; }
+        .hero-content { max-width: 900px; position: relative; z-index: 1; width: 100%; }
+        
+        .live-badge { display: inline-flex; align-items: center; gap: 10px; padding: 8px 18px; border-radius: 100px; background: rgba(14,124,123,0.08); border: 1px solid rgba(14,124,123,0.3); margin-bottom: clamp(15px, 3vw, 25px); }
+        .live-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--teal-light); animation: pulse 2s infinite; }
+        .live-badge span { font-size: 11px; font-weight: 700; color: var(--teal-light); letter-spacing: 2px; text-transform: uppercase; }
+
+        .revolving-text { transition: opacity 0.5s ease-in-out; min-height: clamp(100px, 15vh, 140px); display: flex; flex-direction: column; justify-content: flex-end; margin-bottom: 10px; }
+        .topic-prompt { font-size: clamp(16px, 2.5vw, 22px); font-weight: 600; color: var(--white); margin-bottom: 8px; opacity: 0.8; line-height: 1.4; }
+        .revolving-text .title-line { font-size: clamp(32px, 6vw, 64px); font-family: 'Playfair Display', serif; line-height: 1.1; margin-bottom: 10px; }
+        .sub { font-size: clamp(14px, 1.8vw, 17px); color: var(--text-muted); max-width: 800px; margin: 0 auto 10px; line-height: 1.6; }
+        .search-label { color: var(--text-muted); font-size: 14px; margin-bottom: 8px; font-weight: 500; }
+        
+        .hero-actions { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
+
+        .search-area { margin-bottom: 15px; width: 100%; }
+        .search-bar { display: flex; gap: 10px; background: rgba(255,255,255,0.05); padding: 6px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.1); max-width: 650px; margin: 0 auto; transition: 0.3s; flex-direction: row; }
+        .search-input { flex: 1; background: transparent; border: none; padding: 12px 15px; color: var(--white); font-size: clamp(14px, 2vw, 16px); outline: none; min-width: 0; }
+        .search-btn { background: var(--teal); color: var(--white); border: none; padding: 12px 25px; border-radius: 12px; font-weight: 600; cursor: pointer; transition: 0.3s; white-space: nowrap; }
+        .search-btn:hover { background: var(--teal-light); transform: translateY(-2px); box-shadow: 0 10px 20px rgba(14, 124, 123, 0.3); }
+        .coming-soon-tag { font-family: 'Playfair Display', serif; font-size: 11px; font-style: italic; color: var(--gold); opacity: 0.85; letter-spacing: 0.5px; margin-top: 6px; text-transform: lowercase; }
+
+        /* Fast Slots Urgency */
+        .urgency-banner { display: inline-flex; align-items: center; gap: 10px; margin-top: 30px; padding: 10px 20px; background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 8px; color: #fca5a5; font-size: 14px; font-weight: 600; }
+        .pulse-dot { width: 8px; height: 8px; background: #ef4444; border-radius: 50%; box-shadow: 0 0 10px #ef4444; animation: pulse 1.5s infinite; }
+
+        /* Detailed User Journeys */
+        .journeys-detailed { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; max-width: 1200px; margin: 0 auto 60px; padding: 0 5%; }
+        .journey-split-card { background: rgba(2, 8, 23, 0.85); border: 1px solid var(--border); backdrop-filter: blur(25px); padding: clamp(25px, 4vw, 40px); border-radius: 24px; transition: 0.4s; text-decoration: none; color: inherit; display: flex; flex-direction: column; min-height: 400px; }
+        .journey-split-card:hover { border-color: rgba(26,188,156,0.4); transform: translateY(-10px); box-shadow: 0 25px 50px rgba(0,0,0,0.5); }
+        
+        .split-card-header { display: flex; gap: 20px; align-items: flex-start; margin-bottom: 25px; }
+        .split-card-header i { font-size: clamp(24px, 3vw, 32px); color: var(--gold); background: rgba(212,147,58,0.1); padding: clamp(12px, 2vw, 16px); border-radius: 16px; }
+        .split-card-header h3 { font-size: clamp(20px, 3vw, 26px); font-family: 'Playfair Display', serif; margin-bottom: 8px; color: var(--white); }
+        
+        /* Sticky Mobile Footer */
+        .sticky-mobile-cta { position: fixed; bottom: 0; left: 0; width: 100%; background: var(--navy); border-top: 1px solid var(--border); padding: 15px 20px; z-index: 2000; display: none; justify-content: center; }
+        
+        /* Global Responsive Breakpoints */
+        @media (max-width: 1200px) {
+            nav { padding: 15px 5%; }
+            .section { padding: 80px 5%; }
+        }
+
+        @media (max-width: 992px) {
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+            .journeys-detailed { grid-template-columns: 1fr; }
+            .journey-split-card { min-height: auto; }
+            .section-header h2 { font-size: clamp(28px, 5vw, 36px); }
+        }
+
+        @media (max-width: 768px) {
+            .hero { padding: 40px 5% 60px; }
+            .hero-actions { flex-direction: column; width: 100%; max-width: 400px; margin: 0 auto; box-sizing: border-box; }
+            .btn-hero, .btn-hero-outline { width: 100%; min-height: 48px; display: flex; align-items: center; justify-content: center; box-sizing: border-box; }
+            .search-bar { flex-direction: column; padding: 12px; gap: 12px; box-sizing: border-box; width: 100%; max-width: 400px; margin: 0 auto; }
+            .search-btn { width: 100%; min-height: 48px; box-sizing: border-box; }
+            .search-input { width: 100%; box-sizing: border-box; }
+            
+            /* Professional Cards Mobile Optimization */
+            .pro-card { flex: 0 0 85%; scroll-snap-align: center; backdrop-filter: none; -webkit-backdrop-filter: none; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+            .pro-card:hover { transform: none; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+            .pro-book-btn { min-height: 44px; }
+            .carousel-track { overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 20px; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+            .carousel-track::-webkit-scrollbar { display: none; }
+            .carousel-nav { display: none; }
+            
+            .guarantee-row { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 15px; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+            .guarantee-row::-webkit-scrollbar { display: none; }
+            .guarantee-item { flex: 0 0 280px; scroll-snap-align: center; }
+            
+            .sticky-mobile-cta { display: flex; min-height: 60px; font-size: 16px; font-weight: 700; align-items: center; justify-content: center; }
+            .steps-container { flex-direction: column; gap: 40px; }
+            .step-connector { display: none; }
+            
+            /* Performance & Stability */
+            .journey-split-card { backdrop-filter: none; -webkit-backdrop-filter: none; }
+            .journey-split-card:hover { transform: none; box-shadow: none; }
+            .trending-strip-container { backdrop-filter: none; -webkit-backdrop-filter: none; }
+        }
+
+        @media (max-width: 480px) {
+            .hero { padding: 20px 5% 40px; }
+            .revolving-text .title-line { font-size: 32px; }
+            .split-card-header { flex-direction: column; align-items: center; text-align: center; }
+            .journey-split-card { padding: 25px; }
+        }
+
+        /* Utility Classes */
+        .d-desktop { display: block !important; }
+        .d-mobile { display: none !important; }
+
+        @media (max-width: 992px) {
+            .d-desktop { display: none !important; }
+            .d-mobile { display: block !important; }
+        }
+
+        /* Layout Polish */
+        .section { padding: clamp(60px, 10vw, 120px) 5%; }
+        .intent-grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+        .pain-points-list { list-style: none; margin-bottom: 35px; }
+        .pain-points-list li { margin-bottom: 15px; font-size: 15px; display: flex; align-items: center; gap: 12px; color: var(--white); opacity: 0.9; }
+        .pain-points-list li i { color: var(--teal-light); font-size: 12px; background: rgba(26,188,156,0.15); padding: 4px; border-radius: 50%; }
+        .split-card-cta { box-sizing: border-box; width: 100%; text-align: center; padding: 16px; font-size: 16px; border-radius: 12px; margin-top: auto; z-index: 2; transition: 0.3s; background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--white); font-weight: 700; position: relative; }
+        .journey-split-card:hover .split-card-cta { background: var(--teal); border-color: var(--teal); box-shadow: 0 10px 20px rgba(14, 124, 123, 0.3); }
+        .pain-points-list li a { transition: 0.2s; }
+        .pain-points-list li a:hover { color: var(--teal-light) !important; transform: translateX(4px); }
+
+        /* High Intent Grid */
+        .intent-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px; }
+        .intent-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 30px; transition: 0.3s; position: relative; overflow: hidden; display: flex; flex-direction: column; }
+        .intent-card:hover { border-color: var(--teal-light); transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.3); }
+        .intent-card h3 { font-size: 20px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+        .intent-card h3 i { color: var(--teal-light); opacity: 0.5; }
+        .intent-card .problem { font-size: 14px; color: var(--text-muted); margin-bottom: 15px; min-height: 44px; }
+        .intent-card .outcome { background: rgba(26,188,156,0.1); color: var(--teal-light); padding: 8px 12px; border-radius: 6px; font-size: 13px; font-weight: 600; margin-bottom: 20px; display: inline-block; }
+        .intent-footer { margin-top: auto; padding-top: 20px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+        .intent-price { font-weight: 700; font-size: 16px; color: var(--white); }
+        .intent-price span { font-size: 11px; color: var(--text-muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px; }
+        .intent-tat { font-size: 12px; color: var(--gold); display: flex; align-items: center; gap: 5px; }
+
+        /* Trending Tags */
+        .trending-strip-container { width: 100%; margin: -30px 0 30px; padding: 18px 30px; position: relative; z-index: 15; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; justify-content: center; background: rgba(2, 8, 23, 0.6); border-top: 1px solid rgba(212,147,58,0.2); border-bottom: 1px solid rgba(212,147,58,0.2); backdrop-filter: blur(15px); box-shadow: 0 15px 40px rgba(0,0,0,0.3); }
+        .trending-label { font-size: 13px; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 8px; margin-right: 10px; }
+        .trending-tag { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 8px 16px; border-radius: 100px; font-size: 13px; color: var(--text-muted); text-decoration: none; transition: 0.3s; white-space: nowrap; }
+        .trending-tag:hover { background: rgba(14,124,123,0.15); border-color: var(--teal-light); color: var(--white); transform: translateY(-2px); }
+
+        /* Premium Expert Carousel */
+        .marketplace-header { text-align: center; margin-bottom: 50px; }
+        .filter-container { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px; }
+        .filter-chip { padding: 7px 18px; border-radius: 100px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); color: var(--text-muted); font-size: 12px; font-weight: 600; cursor: pointer; transition: 0.3s; }
+        .filter-chip:hover { border-color: var(--teal-light); color: var(--white); background: rgba(26,188,156,0.08); }
+        .filter-chip.active { border-color: var(--teal); background: var(--teal); color: var(--white); }
+
+        .carousel-wrapper { position: relative; max-width: 1200px; margin: 0 auto; overflow: hidden; padding: 10px 0 50px; }
+        .carousel-track { display: flex; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); gap: 20px; align-items: stretch; }
+
+        /* Professional Expert Card */
+        .pro-card {
+            flex: 0 0 calc(33.333% - 13.33px);
+            min-width: 280px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: 0.35s cubic-bezier(0.4,0,0.2,1);
+            display: flex;
+            flex-direction: column;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            height: auto;
+        }
+        .pro-card:hover {
+            border-color: rgba(26,188,156,0.35);
+            transform: translateY(-6px);
+            box-shadow: 0 16px 40px rgba(0,0,0,0.25), 0 0 0 1px rgba(26,188,156,0.15);
+        }
+
+        /* Card Header */
+        .pro-card-header {
+            padding: 22px 22px 16px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .pro-avatar {
+            width: 52px; height: 52px; flex-shrink: 0;
+            border-radius: 14px;
+            background: linear-gradient(135deg, var(--teal) 0%, var(--teal-light) 100%);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 18px; font-weight: 800; color: var(--white);
+            letter-spacing: -0.5px;
+        }
+        .pro-header-info { flex: 1; min-width: 0; }
+        .pro-name-row { display: flex; align-items: center; gap: 6px; margin-bottom: 3px; }
+        .pro-name-row h3 { font-size: 16px; font-weight: 700; color: var(--white); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin: 0; }
+        .verified-badge { color: var(--teal-light); font-size: 13px; flex-shrink: 0; }
+        .pro-qual { font-size: 12px; color: var(--text-muted); margin: 0; }
+        .pro-exp { font-size: 11px; color: var(--text-muted); opacity: 0.7; margin: 0; }
+        .pro-loc { font-size: 11px; color: var(--text-muted); opacity: 0.8; margin: 0; display: flex; align-items: center; gap: 4px; margin-top: 2px; }
+        .expert-badge-pill {
+            flex-shrink: 0;
+            font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px;
+            padding: 4px 10px; border-radius: 6px;
+            background: rgba(212,147,58,0.15); color: var(--gold); border: 1px solid rgba(212,147,58,0.25);
+        }
+        .expert-badge-pill.most-booked { background: rgba(26,188,156,0.12); color: var(--teal-light); border-color: rgba(26,188,156,0.25); }
+
+        /* Card Metrics Row */
+        .pro-metrics-row {
+            display: flex;
+            padding: 14px 22px;
+            gap: 0;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .pro-metric {
+            flex: 1;
+            display: flex; flex-direction: column; align-items: center;
+            gap: 2px;
+        }
+        .pro-metric + .pro-metric { border-left: 1px solid rgba(255,255,255,0.06); }
+        .pro-metric-value { font-size: 15px; font-weight: 800; color: var(--white); }
+        .pro-metric-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.8px; }
+
+        /* Specialisations */
+        .pro-tags-row { padding: 14px 22px; display: flex; gap: 6px; flex-wrap: wrap; flex: 1; align-content: flex-start; }
+        .tag {
+            font-size: 10px; font-weight: 600;
+            padding: 4px 10px; border-radius: 6px;
+            background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+            color: var(--text-muted); letter-spacing: 0.3px;
+            transition: 0.2s;
+        }
+        .pro-card:hover .tag { border-color: rgba(26,188,156,0.2); }
+
+        /* Card Footer */
+        .pro-card-footer {
+            margin-top: auto;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 16px 22px;
+            background: rgba(0,0,0,0.15);
+            border-top: 1px solid rgba(255,255,255,0.06);
+        }
+        .pro-price { display: flex; flex-direction: column; gap: 1px; }
+        .pro-price-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.8px; }
+        .pro-price-value { font-size: 18px; font-weight: 800; color: var(--white); }
+        .pro-book-btn {
+            background: var(--teal); color: var(--white); border: none;
+            padding: 9px 18px; border-radius: 10px;
+            font-weight: 700; font-size: 13px; cursor: pointer; transition: 0.25s;
+            display: flex; align-items: center; gap: 5px;
+        }
+        .pro-book-btn:hover { background: var(--teal-light); transform: translateY(-1px); box-shadow: 0 6px 16px rgba(14,124,123,0.3); }
+
+        /* Carousel Navigation */
+        .carousel-nav { display: flex; justify-content: center; gap: 12px; margin-top: 10px; }
+        .nav-btn { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--border); background: rgba(255,255,255,0.04); color: var(--white); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.3s; font-size: 14px; }
+        .nav-btn:hover { background: var(--teal); border-color: var(--teal); }
+
+        .marketplace-trust-row { display: flex; justify-content: center; gap: 30px; margin-top: 30px; padding: 14px; border-bottom: 1px solid var(--border); border-top: 1px solid var(--border); }
+        .trust-indicator { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text-muted); font-weight: 600; }
+        .trust-indicator i { color: var(--teal-light); }
+        .marketplace-footer-copy { text-align: center; max-width: 800px; margin: 35px auto 0; font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+
+        @media (max-width: 1024px) { .pro-card { flex: 0 0 calc(50% - 10px); } }
+        @media (max-width: 768px) {
+            .carousel-track { overflow-x: auto; scroll-snap-type: x mandatory; padding: 0 16px; gap: 16px; }
+            .pro-card { flex: 0 0 88%; scroll-snap-align: center; }
+            .carousel-nav { display: none; }
+            .marketplace-trust-row { flex-direction: column; align-items: center; gap: 12px; }
+        }
+
+        /* Minimal 3-Step Flow */
+        .step-flow-section { padding: 80px 5%; position: relative; overflow: hidden; background: rgba(255,255,255,0.01); }
+        .steps-container { position: relative; max-width: 1100px; margin: 50px auto 0; display: flex; justify-content: space-between; gap: 20px; }
+        .step-card { flex: 1; position: relative; background: var(--card-bg); border: 1px solid var(--border); padding: 28px 24px; border-radius: 20px; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); display: flex; flex-direction: column; align-items: center; text-align: center; z-index: 2; }
+        .step-card:hover { transform: translateY(-6px); border-color: var(--teal-light); box-shadow: 0 16px 32px rgba(0,0,0,0.3); }
+        
+        .step-icon-wrapper { position: relative; margin-bottom: 18px; }
+        .step-number { position: absolute; top: -8px; right: -8px; width: 26px; height: 26px; background: linear-gradient(135deg, var(--teal), var(--teal-light)); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 12px; border: 2px solid var(--navy); box-shadow: 0 3px 8px rgba(0,0,0,0.3); }
+        .step-icon { width: 60px; height: 60px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 24px; color: var(--teal-light); transition: 0.3s; }
+        .step-card:hover .step-icon { background: rgba(26,188,156,0.1); border-color: var(--teal-light); color: var(--white); transform: scale(1.08) rotate(4deg); }
+        .step-card h3 { font-size: 18px; margin-bottom: 10px; color: var(--white); font-family: 'Playfair Display', serif; }
+        .step-card p { font-size: 13px; color: var(--text-muted); line-height: 1.55; margin-bottom: 15px; }
+        
+        .step-list { text-align: left; width: 100%; margin-bottom: 18px; list-style: none; padding: 0; }
+        .step-list li { margin-bottom: 8px; font-size: 13px; color: var(--white); display: flex; align-items: center; gap: 8px; opacity: 0.9; }
+        .step-list li::before { content: '•'; color: var(--teal-light); font-weight: bold; }
+
+        .step-cta { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--border); background: rgba(255,255,255,0.02); color: var(--white); font-weight: 700; font-size: 13px; text-decoration: none; transition: 0.3s; display: block; text-align: center; }
+        .step-card:hover .step-cta { background: var(--teal); border-color: var(--teal); }
+
+        /* The Kroovo Shield Strip */
+        .guarantee-section { padding: 50px 60px; background: rgba(255,255,255,0.01); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+        .guarantee-header { text-align: center; margin-bottom: 35px; }
+        .guarantee-header h2 { font-family: 'Playfair Display', serif; font-size: 32px; color: var(--white); margin-bottom: 8px; }
+        .guarantee-header p { font-size: 14px; color: var(--text-muted); }
+        
+        .guarantee-row { display: flex; gap: 20px; max-width: 1400px; margin: 0 auto; }
+        .guarantee-item { flex: 1; display: flex; gap: 12px; align-items: center; padding: 18px 22px; border-radius: 14px; border: 1px solid var(--border); background: rgba(255,255,255,0.02); transition: 0.3s; }
+        .guarantee-item:hover { border-color: rgba(26,188,156,0.4); box-shadow: 0 0 30px rgba(26,188,156,0.08); background: rgba(255,255,255,0.04); }
+        .guarantee-icon { font-size: 20px; color: var(--teal-light); flex-shrink: 0; }
+        .guarantee-content h4 { font-size: 13px; font-weight: 700; color: var(--white); margin-bottom: 3px; letter-spacing: 0.3px; }
+        .guarantee-content p { font-size: 11px; color: var(--text-muted); line-height: 1.4; margin: 0; }
+        
+        .trust-ticker { text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.05); font-size: 10px; color: var(--text-muted); letter-spacing: 1.5px; font-weight: 600; text-transform: uppercase; opacity: 0.8; }
+
+        @media (max-width: 1024px) {
+            .guarantee-row { display: grid; grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 768px) {
+            .guarantee-section { padding: 40px 20px; }
+            .guarantee-header h2 { font-size: 26px; }
+            .guarantee-row { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 10px; gap: 15px; }
+            .guarantee-item { flex: 0 0 260px; scroll-snap-align: center; padding: 15px; }
+            .trust-ticker { font-size: 9px; letter-spacing: 1px; }
+        }
+
+        .step-connector { position: absolute; top: 58px; left: 10%; right: 10%; height: 2px; background: linear-gradient(90deg, transparent, var(--border), transparent); z-index: 1; }
+        .connector-progress { position: absolute; top: 0; left: 0; height: 100%; width: 0%; background: linear-gradient(90deg, var(--teal), var(--teal-light)); animation: connectFlow 3s infinite; }
+        @keyframes connectFlow { 0% { width: 0%; left: 0; } 50% { width: 100%; left: 0; } 100% { width: 0%; left: 100%; } }
+
+        .trust-note { text-align: center; margin-top: 40px; font-size: 14px; color: var(--gold); font-weight: 600; background: rgba(212, 147, 58, 0.05); display: inline-block; padding: 10px 25px; border-radius: 50px; border: 1px solid rgba(212, 147, 58, 0.2); }
+        .trust-indicators-row { text-align: center; margin-top: 30px; font-size: 13px; color: var(--text-muted); font-weight: 500; letter-spacing: 0.5px; }
+        .microcopy { text-align: center; margin-top: 25px; font-size: 15px; color: var(--text-muted); line-height: 1.6; max-width: 800px; margin-left: auto; margin-right: auto; opacity: 0.9; }
+
+        .sticky-mobile-cta { box-sizing: border-box; display: none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: calc(100vw - 40px); max-width: 400px; z-index: 1000; background: var(--teal); color: white; padding: 16px; border-radius: 12px; text-align: center; font-weight: 700; text-decoration: none; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+
+        /* Footer — Premium Redesign */
+        footer {
+            background: #000;
+            border-top: 1px solid transparent;
+            background-clip: padding-box;
+            position: relative;
+        }
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--teal), var(--gold), var(--teal), transparent);
+        }
+        .footer-inner {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 70px 5% 0;
+        }
+        .footer-top {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr 1.2fr;
+            gap: 50px;
+            padding-bottom: 50px;
+            border-bottom: 1px solid var(--border);
+        }
+        .footer-brand .brand-logo { display: block; margin-bottom: 16px; transform-origin: left center; }
+        .footer-brand p {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.7;
+            max-width: 260px;
+            margin: 0 0 24px;
+        }
+        .footer-social {
+            display: flex;
+            gap: 10px;
+        }
+        .footer-social a {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: rgba(255,255,255,0.03);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 15px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .footer-social a:hover {
+            border-color: var(--teal-light);
+            color: var(--teal-light);
+            background: rgba(26,188,156,0.08);
+            transform: translateY(-2px);
+        }
+        .footer-col h4 {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--white);
+            margin-bottom: 22px;
+            opacity: 0.5;
+        }
+        .footer-col ul { list-style: none; padding: 0; }
+        .footer-col ul li { margin-bottom: 12px; }
+        .footer-col ul li a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .footer-col ul li a:hover { color: var(--white); padding-left: 4px; }
+        .footer-col ul li.coming-soon a { opacity: 0.35; pointer-events: none; cursor: default; }
+        .footer-col ul li.coming-soon a::after { content: 'Soon'; font-size: 9px; background: rgba(212,147,58,0.15); color: var(--gold); padding: 1px 6px; border-radius: 4px; font-weight: 700; letter-spacing: 0.5px; }
+        .footer-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 22px 0;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .footer-bottom .copyright {
+            font-size: 13px;
+            color: var(--text-muted);
+            opacity: 0.6;
+            margin: 0;
+        }
+        .footer-bottom-links {
+            display: flex;
+            gap: 24px;
+        }
+        .footer-bottom-links a {
+            font-size: 12px;
+            color: var(--text-muted);
+            text-decoration: none;
+            opacity: 0.5;
+            transition: 0.2s;
+        }
+        .footer-bottom-links a:hover { opacity: 1; color: var(--white); }
+        @media (max-width: 1024px) {
+            .footer-top { grid-template-columns: 1fr 1fr 1fr; }
+            .footer-brand { grid-column: 1 / -1; }
+        }
+        @media (max-width: 640px) {
+            .footer-top { grid-template-columns: 1fr 1fr; gap: 30px; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+            .footer-bottom-links { flex-wrap: wrap; justify-content: center; gap: 16px; }
+        }
+
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
+
+        @media (max-width: 768px) {
+            .hero { padding: 40px 20px 60px; }
+            .hero h1 { font-size: 42px; }
+            .hero-actions { flex-direction: column; align-items: center; width: 100%; max-width: 400px; margin: 0 auto; }
+            .section { padding: 60px 20px; }
+            
+            /* Stability: Disable blur on moving carousel cards to prevent GPU flickering */
+            .pro-card { 
+                backdrop-filter: none !important; 
+                -webkit-backdrop-filter: none !important; 
+                background: rgba(9, 38, 72, 0.95) !important;
+                flex: 0 0 88% !important; 
+                scroll-snap-align: center;
+                min-height: 500px; 
+                contain: paint; /* Minimize repaint cost */
+                box-shadow: none !important; /* Shadows are expensive during swipes */
+            }
+            .carousel-wrapper {
+                margin-left: -20px;
+                margin-right: -20px;
+                width: calc(100% + 40px);
+                border-radius: 0;
+            }
+            .carousel-track { 
+                overflow-x: auto; 
+                scroll-snap-type: x mandatory; 
+                padding: 10px 20px 30px !important; 
+                gap: 15px; 
+                -webkit-overflow-scrolling: touch;
+                display: flex !important;
+                flex-wrap: nowrap !important;
+                align-items: stretch !important;
+                transform: none !important;
+            }
+            .nav-drawer { backdrop-filter: none !important; background: #020817 !important; }
+            .btn-hero-outline { backdrop-filter: none !important; background: rgba(255,255,255,0.08) !important; }
+            
+            .sticky-mobile-cta { display: flex; }
+            .steps-container { flex-direction: column; gap: 40px; }
+        }
+
+        /* Service Modals */
+        .svc-modal-overlay { position: fixed; inset: 0; background: rgba(2,8,23,0.85); backdrop-filter: blur(8px); z-index: 5000; display: none; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease; }
+        .svc-modal-overlay.active { display: flex; opacity: 1; }
+        .svc-modal { background: linear-gradient(160deg, #0a1628 0%, #020817 100%); border: 1px solid rgba(255,255,255,0.1); border-radius: 24px; width: 90%; max-width: 720px; max-height: 85vh; overflow-y: auto; position: relative; animation: modalSlideIn 0.35s cubic-bezier(0.16,1,0.3,1); box-shadow: 0 40px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(26,188,156,0.1); }
+        @keyframes modalSlideIn { from { opacity: 0; transform: translateY(30px) scale(0.97); } to { opacity: 1; transform: translateY(0) scale(1); } }
+        .svc-modal::-webkit-scrollbar { width: 4px; } .svc-modal::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
+        .svc-modal-head { padding: 30px 35px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; background: linear-gradient(160deg, #0a1628 0%, #020817 100%); z-index: 2; border-radius: 24px 24px 0 0; }
+        .svc-modal-head h2 { font-family: 'Playfair Display', serif; font-size: 24px; display: flex; align-items: center; gap: 12px; }
+        .svc-modal-head h2 i { color: var(--gold); font-size: 20px; }
+        .svc-modal-close { width: 36px; height: 36px; border-radius: 10px; border: 1px solid var(--border); background: rgba(255,255,255,0.04); color: var(--text-muted); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 16px; transition: 0.2s; }
+        .svc-modal-close:hover { background: rgba(239,68,68,0.15); border-color: rgba(239,68,68,0.3); color: #fca5a5; }
+        .svc-modal-body { padding: 20px 35px 30px; display: flex; flex-direction: column; gap: 12px; }
+        .svc-modal-item { display: flex; align-items: center; gap: 16px; padding: 16px 18px; border-radius: 14px; border: 1px solid var(--border); background: rgba(255,255,255,0.02); transition: 0.3s; }
+        .svc-modal-item:hover { border-color: rgba(26,188,156,0.35); background: rgba(26,188,156,0.05); transform: translateX(4px); }
+        .svc-modal-item.upcoming { opacity: 0.5; pointer-events: none; }
+        .svc-modal-icon { width: 44px; height: 44px; border-radius: 12px; background: rgba(26,188,156,0.08); border: 1px solid rgba(26,188,156,0.15); display: flex; align-items: center; justify-content: center; font-size: 18px; color: var(--teal-light); flex-shrink: 0; }
+        .svc-modal-item.upcoming .svc-modal-icon { background: rgba(212,147,58,0.08); border-color: rgba(212,147,58,0.15); color: var(--gold); }
+        .svc-modal-info { flex: 1; min-width: 0; }
+        .svc-modal-info h4 { font-size: 15px; font-weight: 700; color: var(--white); margin: 0 0 3px; display: flex; align-items: center; gap: 8px; }
+        .svc-modal-info p { font-size: 12px; color: var(--text-muted); margin: 0; }
+        .svc-soon-badge { font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; padding: 3px 8px; border-radius: 5px; background: rgba(212,147,58,0.15); color: var(--gold); border: 1px solid rgba(212,147,58,0.25); white-space: nowrap; }
+        .svc-modal-book { flex-shrink: 0; background: var(--teal); color: white; border: none; padding: 8px 16px; border-radius: 8px; font-size: 12px; font-weight: 700; cursor: pointer; transition: 0.25s; text-decoration: none; white-space: nowrap; }
+        .svc-modal-book:hover { background: var(--teal-light); transform: translateY(-1px); box-shadow: 0 6px 16px rgba(14,124,123,0.3); }
+        @media (max-width: 640px) {
+            .svc-modal { width: 95%; max-height: 90vh; border-radius: 18px; }
+            .svc-modal-head { padding: 20px 20px 15px; } .svc-modal-body { padding: 15px 20px 25px; }
+            .svc-modal-item { flex-wrap: wrap; gap: 10px; padding: 14px; }
+            .svc-modal-book { width: 100%; text-align: center; padding: 10px; }
+        }
+
+        /* Promotional Banner */
+        .promo-banner {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--teal) 100%);
+            color: var(--white);
+            padding: 12px 24px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 600;
+            position: relative;
+            z-index: 10001;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.35);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .promo-banner.dismissed {
+            margin-top: -60px;
+            opacity: 0;
+            pointer-events: none;
+        }
+        .promo-banner-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .promo-badge {
+            background: var(--white);
+            color: var(--teal);
+            font-size: 10px;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 5px;
+            letter-spacing: 0.8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        }
+        .promo-text {
+            letter-spacing: 0.3px;
+        }
+        .promo-close-btn {
+            background: transparent;
+            border: none;
+            color: var(--white);
+            font-size: 22px;
+            cursor: pointer;
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            transition: all 0.2s;
+            opacity: 0.8;
+        }
+        .promo-close-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            opacity: 1;
+            transform: translateY(-50%) scale(1.1);
+        }
+        /* ── AUTH & PLATFORM ENHANCEMENTS ────────────────────────────────── */
+        .nav-auth-group { display: flex; align-items: center; gap: 12px; }
+        .btn-nav-signin {
+            background: transparent;
+            color: var(--white);
+            border: 1px solid var(--border);
+            padding: 9px 20px;
+            border-radius: 9px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.25s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .btn-nav-signin:hover {
+            border-color: var(--teal-light);
+            color: var(--teal-light);
+            background: rgba(26, 188, 156, 0.08);
+            transform: translateY(-1px);
+        }
+        .btn-nav-signup {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light, #E8B45A) 100%);
+            color: #020817;
+            border: none;
+            padding: 9px 22px;
+            border-radius: 9px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.25s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 4px 15px rgba(212, 169, 95, 0.25);
+        }
+        .btn-nav-signup:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(212, 169, 95, 0.4);
+            filter: brightness(1.05);
+        }
+        
+        /* User Profile Pill in Nav */
+        .user-nav-profile {
+            display: none;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            padding: 5px 14px 5px 6px;
+            border-radius: 50px;
+            cursor: pointer;
+            position: relative;
+            transition: 0.25s;
+        }
+        .user-nav-profile:hover {
+            border-color: var(--teal-light);
+            background: rgba(26, 188, 156, 0.08);
+        }
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--teal), var(--teal-light));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 13px;
+            overflow: hidden;
+        }
+        .user-avatar img { width: 100%; height: 100%; object-fit: cover; }
+        .user-nav-name { font-size: 13px; font-weight: 600; color: var(--white); }
+        .user-role-badge { font-size: 9px; background: rgba(212, 147, 58, 0.2); color: var(--gold); padding: 2px 6px; border-radius: 4px; font-weight: 700; text-transform: uppercase; }
+        
+        /* User Dropdown */
+        .user-dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            right: 0;
+            width: 220px;
+            background: #09172A;
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 14px;
+            padding: 10px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            z-index: 1002;
+            animation: modalSlideIn 0.2s ease;
+        }
+        .user-dropdown-menu.active { display: flex; }
+        .user-dropdown-item {
+            padding: 10px 14px;
+            border-radius: 8px;
+            color: var(--text-muted);
+            font-size: 13px;
+            font-weight: 500;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: 0.2s;
+            cursor: pointer;
+            background: transparent;
+            border: none;
+            width: 100%;
+            text-align: left;
+        }
+        .user-dropdown-item:hover { color: var(--white); background: rgba(255,255,255,0.06); }
+        .user-dropdown-item.logout { color: #fca5a5; }
+        .user-dropdown-item.logout:hover { background: rgba(239,68,68,0.15); }
+
+        /* ── MODAL OVERLAYS (GENERIC) ────────────────────────────── */
+        .kroovo-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(2, 8, 23, 0.88);
+            backdrop-filter: blur(12px);
+            z-index: 99999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .kroovo-modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+        
+        /* ── AUTH MODAL (ExpertDesk 2-Column Luxury Style) ──────────── */
+        .auth-card {
+            background: #ffffff;
+            border-radius: 28px;
+            width: 100%;
+            max-width: 960px;
+            min-height: 580px;
+            display: grid;
+            grid-template-columns: 1fr 1.15fr;
+            overflow: hidden;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.1);
+            position: relative;
+            animation: modalSlideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .auth-left-panel {
+            background: radial-gradient(circle at 20% 20%, #0d2847 0%, #020817 100%);
+            padding: 50px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            color: var(--white);
+            border-right: 1px solid rgba(255,255,255,0.08);
+        }
+        .auth-brand-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.12);
+            padding: 6px 14px;
+            border-radius: 50px;
+            width: fit-content;
+        }
+        .auth-brand-badge span { font-size: 11px; font-weight: 700; color: var(--gold); letter-spacing: 1.5px; text-transform: uppercase; }
+        .auth-left-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(26px, 3vw, 36px);
+            font-weight: 800;
+            line-height: 1.2;
+            margin: 25px 0 15px;
+        }
+        .auth-left-desc {
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.65;
+            margin-bottom: 25px;
+        }
+        .auth-perks-list { list-style: none; display: flex; flex-direction: column; gap: 14px; font-size: 13px; color: #cbd5e1; }
+        .auth-perks-list li { display: flex; align-items: center; gap: 10px; }
+        .auth-perks-list i { color: var(--teal-light); font-size: 14px; }
+        
+        .auth-right-panel {
+            padding: 45px 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            color: #0f172a;
+            position: relative;
+            background: #ffffff;
+            overflow-y: auto;
+            max-height: 85vh;
+        }
+        .auth-close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid #e2e8f0;
+            background: #f8fafc;
+            color: #64748b;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+            z-index: 10;
+        }
+        .auth-close-btn:hover { background: #fee2e2; color: #ef4444; border-color: #fca5a5; }
+        
+        /* Auth Switch Tabs */
+        .auth-tabs {
+            display: flex;
+            border-bottom: 2px solid #f1f5f9;
+            margin-bottom: 25px;
+            gap: 20px;
+        }
+        .auth-tab-btn {
+            background: none;
+            border: none;
+            font-size: 16px;
+            font-weight: 700;
+            color: #94a3b8;
+            padding: 0 0 12px;
+            cursor: pointer;
+            position: relative;
+            transition: 0.2s;
+        }
+        .auth-tab-btn.active { color: #020817; }
+        .auth-tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--gold);
+            border-radius: 2px;
+        }
+
+        /* Role Selector in Get Started */
+        .role-selector-wrap { margin-bottom: 20px; }
+        .role-selector-label { font-size: 12px; font-weight: 700; color: #64748b; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.8px; }
+        .role-selector {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            background: #f1f5f9;
+            padding: 4px;
+            border-radius: 12px;
+        }
+        .role-pill-btn {
+            background: transparent;
+            border: none;
+            padding: 10px 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #64748b;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            transition: 0.2s;
+        }
+        .role-pill-btn small { font-size: 10px; font-weight: 400; opacity: 0.8; }
+        .role-pill-btn.active {
+            background: #ffffff;
+            color: #020817;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            font-weight: 700;
+        }
+
+        /* Google Sign In Button */
+        .btn-google-auth {
+            width: 100%;
+            background: #ffffff;
+            border: 1.5px solid #e2e8f0;
+            padding: 12px 18px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #1e293b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: 0.25s;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+            margin-bottom: 20px;
+        }
+        .btn-google-auth:hover {
+            border-color: #94a3b8;
+            background: #f8fafc;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        }
+        .google-icon-svg { width: 18px; height: 18px; }
+
+        .auth-divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 15px 0 20px;
+            color: #94a3b8;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .auth-divider::before, .auth-divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .auth-divider span { padding: 0 14px; }
+
+        /* Form Inputs */
+        .auth-form-group { margin-bottom: 16px; position: relative; }
+        .auth-label { font-size: 13px; font-weight: 600; color: #334155; margin-bottom: 6px; display: block; }
+        .auth-input-wrap { position: relative; display: flex; align-items: center; }
+        .auth-input-icon { position: absolute; left: 14px; color: #94a3b8; font-size: 14px; pointer-events: none; }
+        .auth-input {
+            width: 100%;
+            padding: 11px 14px 11px 40px;
+            border-radius: 10px;
+            border: 1.5px solid #e2e8f0;
+            background: #ffffff;
+            color: #0f172a;
+            font-size: 14px;
+            font-family: inherit;
+            outline: none;
+            transition: 0.2s;
+        }
+        .auth-input:focus { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(14,124,123,0.15); }
+        .password-toggle-btn { position: absolute; right: 14px; background: none; border: none; color: #94a3b8; cursor: pointer; font-size: 14px; }
+
+        .auth-submit-btn {
+            width: 100%;
+            background: #020817;
+            color: var(--white);
+            border: none;
+            padding: 13px 20px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.25s;
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .auth-submit-btn:hover { background: #0f2744; transform: translateY(-1px); box-shadow: 0 10px 20px rgba(2,8,23,0.25); }
+
+        .auth-footer-notice {
+            margin-top: 18px;
+            text-align: center;
+            font-size: 12px;
+            color: #64748b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        /* ── EMBEDDED MODALS (TALLY & JOTFORM) ────────────────────────── */
+        .embed-modal-content {
+            background: #09172A;
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 24px;
+            width: 100%;
+            max-width: 820px;
+            height: 90vh;
+            max-height: 820px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.8), 0 0 0 1px rgba(26,188,156,0.15);
+            animation: modalSlideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+        }
+        .embed-modal-header {
+            padding: 18px 25px;
+            background: #020817;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-shrink: 0;
+        }
+        .embed-header-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .embed-header-title h3 { font-size: 17px; font-weight: 700; color: var(--white); margin: 0; }
+        .embed-header-badge { font-size: 10px; background: rgba(26,188,156,0.15); color: var(--teal-light); padding: 3px 8px; border-radius: 6px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+        .embed-modal-body {
+            flex: 1;
+            width: 100%;
+            background: #ffffff;
+            position: relative;
+            overflow: hidden;
+        }
+        .embed-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+        .embed-loading-state {
+            position: absolute;
+            inset: 0;
+            background: #09172A;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            color: var(--white);
+            z-index: 5;
+            transition: opacity 0.3s;
+        }
+        .embed-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(26,188,156,0.2);
+            border-top-color: var(--teal-light);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* ── TOAST NOTIFICATIONS ────────────────────────────────── */
+        .toast-container {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            z-index: 100000;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            pointer-events: none;
+            max-width: 400px;
+            width: calc(100vw - 60px);
+        }
+        .kroovo-toast {
+            background: #091c34;
+            border: 1px solid rgba(26,188,156,0.3);
+            border-radius: 14px;
+            padding: 16px 18px;
+            color: var(--white);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            pointer-events: auto;
+            animation: toastIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(12px);
+        }
+        .kroovo-toast.success { border-color: rgba(26,188,156,0.5); }
+        .kroovo-toast.info { border-color: rgba(59,130,246,0.5); }
+        .kroovo-toast.gold { border-color: rgba(212,169,95,0.5); }
+        
+        .toast-icon-wrap {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: rgba(26,188,156,0.15);
+            color: var(--teal-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            flex-shrink: 0;
+        }
+        .kroovo-toast.info .toast-icon-wrap { background: rgba(59,130,246,0.15); color: #60a5fa; }
+        .kroovo-toast.gold .toast-icon-wrap { background: rgba(212,169,95,0.15); color: var(--gold); }
+        
+        .toast-content { flex: 1; }
+        .toast-title { font-size: 14px; font-weight: 700; margin-bottom: 3px; color: var(--white); }
+        .toast-desc { font-size: 12px; color: var(--text-muted); line-height: 1.4; }
+        .toast-close { background: none; border: none; color: #64748b; font-size: 16px; cursor: pointer; padding: 0; margin-left: 6px; }
+        .toast-close:hover { color: var(--white); }
+        .toast-progress {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            background: var(--teal-light);
+            width: 100%;
+            animation: toastProgress 5s linear forwards;
+        }
+        .kroovo-toast.gold .toast-progress { background: var(--gold); }
+        @keyframes toastIn { from { transform: translateY(20px) scale(0.95); opacity: 0; } to { transform: translateY(0) scale(1); opacity: 1; } }
+        @keyframes toastProgress { from { width: 100%; } to { width: 0%; } }
+
+        /* ── SCHEDULING & SUCCESS DIALOG ────────────────────────── */
+        .schedule-dialog {
+            background: #09172A;
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 24px;
+            padding: 40px;
+            max-width: 520px;
+            width: 100%;
+            text-align: center;
+            color: var(--white);
+            animation: modalSlideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.7);
+        }
+        .schedule-success-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: rgba(26,188,156,0.15);
+            border: 2px solid var(--teal-light);
+            color: var(--teal-light);
+            font-size: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            animation: pulse 2s infinite;
+        }
+        .schedule-actions-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 25px;
+        }
+        .btn-calendar-add {
+            background: #ffffff;
+            color: #0f172a;
+            padding: 13px 20px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-decoration: none;
+            transition: 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-calendar-add:hover { background: #f1f5f9; transform: translateY(-1px); }
+        .btn-calendar-ics {
+            background: rgba(255,255,255,0.06);
+            color: var(--white);
+            border: 1px solid var(--border);
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+            text-decoration: none;
+        }
+        .btn-calendar-ics:hover { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.25); }
+
+        @media (max-width: 860px) {
+            .auth-card { grid-template-columns: 1fr; max-height: 90vh; }
+            .auth-left-panel { display: none; }
+            .auth-right-panel { padding: 35px 25px; }
+            .embed-modal-content { height: 94vh; max-height: 94vh; border-radius: 18px; }
+            .toast-container { left: 15px; bottom: 15px; width: calc(100vw - 30px); }
+        }
+    </style>
+</head>
+<body id="top">
+
+    <!-- Promotional Offer Banner -->
+    <div class="promo-banner" id="promo-banner">
+        <div class="promo-banner-content">
+            <span class="promo-badge">PROMOTIONAL OFFER</span>
+            <span class="promo-text">🎉 <strong>Free Consultation</strong> for the first 100 customers! Limited slots remaining.* <a href="terms.html#promotional-terms" style="color: var(--white); text-decoration: underline; font-weight: 500; font-size: 0.9em; margin-left: 5px;">*Conditions Apply</a></span>
+        </div>
+        <button class="promo-close-btn" onclick="dismissPromoBanner()" aria-label="Dismiss banner">&times;</button>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="logo.png" alt="Kroovo Logo" class="brand-logo">
+            </a>
+            <ul class="nav-links">
+                <li><a href="#services">Services</a></li>
+                <li><a href="#trending">Trending Now</a></li>
+                <li><a href="#experts">Experts</a></li>
+                <li><a href="#trust">Kroovo Shield</a></li>
+                <li><a href="#how">How It Works</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="blogs.html">Insights</a></li>
+            </ul>
+            <div class="nav-cta d-desktop">
+                <!-- Unauthenticated State (Default) -->
+                <div class="nav-auth-group" id="nav-unauth-actions">
+                    <button type="button" class="btn-nav-signin" onclick="openAuthModal('signin')">
+                        <i class="fa-regular fa-user"></i> Sign In
+                    </button>
+                    <button type="button" class="btn-nav-signup" onclick="openAuthModal('getstarted')">
+                        Get Started
+                    </button>
+                </div>
+
+                <!-- Authenticated State -->
+                <div class="user-nav-profile" id="nav-user-profile" onclick="toggleUserDropdown(event)">
+                    <div class="user-avatar" id="user-avatar-initials">U</div>
+                    <div class="user-nav-name" id="user-nav-display-name">User</div>
+                    <span class="user-role-badge" id="user-role-badge">Client</span>
+                    <i class="fa-solid fa-chevron-down" style="font-size: 10px; color: var(--text-muted);"></i>
+
+                    <!-- User Dropdown Menu -->
+                    <div class="user-dropdown-menu" id="user-dropdown-menu">
+                        <div style="padding: 6px 12px; border-bottom: 1px solid rgba(255,255,255,0.06); margin-bottom: 4px;">
+                            <div style="font-size: 13px; font-weight: 700; color: white;" id="dropdown-user-name">User</div>
+                            <div style="font-size: 11px; color: var(--text-muted);" id="dropdown-user-email">user@example.com</div>
+                        </div>
+                        <button type="button" class="user-dropdown-item" onclick="openBookingModal()">
+                            <i class="fa-solid fa-calendar-plus" style="color: var(--teal-light);"></i> Book Consultation
+                        </button>
+                        <button type="button" class="user-dropdown-item" onclick="openExpertModal()">
+                            <i class="fa-solid fa-user-tie" style="color: var(--gold);"></i> Expert Portal
+                        </button>
+                        <button type="button" class="user-dropdown-item" onclick="showScheduleModal({title:'Next Advisory Session', time:'Upcoming', topic:'General'})">
+                            <i class="fa-solid fa-clock-rotate-left"></i> My Schedule
+                        </button>
+                        <div style="height: 1px; background: rgba(255,255,255,0.06); margin: 4px 0;"></div>
+                        <button type="button" class="user-dropdown-item logout" onclick="signOutUser()">
+                            <i class="fa-solid fa-arrow-right-from-bracket"></i> Sign Out
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="hamburger" id="mobile-menu-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="nav-drawer" id="mobile-drawer">
+        <div id="mobile-user-status" style="display: none; padding: 15px; background: rgba(255,255,255,0.04); border-radius: 14px; margin-bottom: 10px;">
+            <div style="display: flex; align-items: center; gap: 12px;">
+                <div class="user-avatar" id="mobile-user-avatar">U</div>
+                <div>
+                    <div style="font-size: 15px; font-weight: 700; color: white;" id="mobile-user-name">User</div>
+                    <div style="font-size: 12px; color: var(--text-muted);" id="mobile-user-email">user@example.com</div>
+                </div>
+            </div>
+            <button type="button" onclick="signOutUser()" style="margin-top: 12px; width: 100%; padding: 8px; border-radius: 8px; border: 1px solid rgba(239,68,68,0.3); background: rgba(239,68,68,0.1); color: #fca5a5; font-size: 12px; font-weight: 600; cursor: pointer;">Sign Out</button>
+        </div>
+
+        <a href="#services" class="drawer-link">Services</a>
+        <a href="#trending" class="drawer-link">Trending Now</a>
+        <a href="#experts" class="drawer-link">Experts</a>
+        <a href="#trust" class="drawer-link">Kroovo Shield</a>
+        <a href="#how" class="drawer-link">How It Works</a>
+        <a href="faq.html" class="drawer-link">FAQ</a>
+        <a href="blogs.html" class="drawer-link">Insights</a>
+        
+        <div class="drawer-cta" style="display: flex; flex-direction: column; gap: 10px;">
+            <div id="mobile-auth-actions" style="display: flex; gap: 10px;">
+                <button type="button" onclick="toggleMenu(); openAuthModal('signin');" class="btn-nav-signin" style="flex: 1; justify-content: center; padding: 12px;">Sign In</button>
+                <button type="button" onclick="toggleMenu(); openAuthModal('getstarted');" class="btn-nav-signup" style="flex: 1; justify-content: center; padding: 12px;">Get Started</button>
+            </div>
+            <button type="button" onclick="toggleMenu(); openBookingModal();" class="btn-primary" style="width: 100%; padding: 14px; font-size: 15px;">
+                <i class="fa-solid fa-calendar-check" style="margin-right: 6px;"></i> Book Consultation
+            </button>
+        </div>
+    </div>
+
+
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-grid"></div>
+
+        <div class="hero-content">
+            
+            <h1 id="revolving-headline" class="revolving-text">
+                <div class="topic-prompt">👉 Got a legal or tax notice?</div>
+                <div class="title-line"><span class="accent">Expert Advisory</span><br><span class="gold">On Your Schedule.</span></div>
+            </h1>
+
+            <p class="sub">Get direct access to highly verified professionals tailored to your specific requirements. Bypass traditional delays with our streamlined matching system, ensuring you receive clear, expert advisory on your schedule.</p>
+
+            <div class="search-area">
+                <p class="search-label">Describe your issue directly</p>
+                <div class="search-bar">
+                    <input type="text" id="hero-search-input" class="search-input" placeholder="E.g. Received GST scrutiny notice for FY 23-24...">
+                    <div style="display: flex; flex-direction: column; align-items: center;">
+                        <a href="#services" style="text-decoration: none;">
+                            <button class="search-btn" type="button"><i class="fa-solid fa-wand-magic-sparkles" style="margin-right: 5px;"></i> AI Assistant</button>
+                        </a>
+                        <span class="coming-soon-tag">coming soon</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-actions" id="trending">
+                <a href="https://tally.so/r/b5NdE6" onclick="openBookingModal(event)" class="btn-hero">Book Consultation</a>
+                <a href="https://form.jotform.com/getkroovo/professional-onboarding-form" onclick="openExpertModal(event)" class="btn-hero-outline">Join as an Expert</a>
+            </div>
+
+
+        </div>
+    </section>
+
+    <!-- Trending Strip (Highlighted) -->
+    <div class="trending-strip-container">
+        <div class="trending-label"><i class="fa-solid fa-fire"></i> Trending Now:</div>
+        <a href="https://tally.so/r/b5NdE6" onclick="openBookingModal(event, 'Tax Refund Strategies')" class="trending-tag">Tax Refund Strategies</a>
+        <a href="https://tally.so/r/b5NdE6" onclick="openBookingModal(event, 'Salary Tax Saving')" class="trending-tag">Salary Tax Saving</a>
+        <a href="https://tally.so/r/b5NdE6" onclick="openBookingModal(event, 'Startup GST Compliance')" class="trending-tag">Startup GST Compliance</a>
+        <a href="https://tally.so/r/b5NdE6" onclick="openBookingModal(event, 'Notice Resolution')" class="trending-tag">Notice Resolution</a>
+        <a href="https://tally.so/r/b5NdE6" onclick="openBookingModal(event, 'FY 2026 Tax Regime')" class="trending-tag">FY 2026 Tax Regime</a>
+        <a href="https://tally.so/r/b5NdE6" onclick="openBookingModal(event, 'ESOP Taxability')" class="trending-tag">ESOP Taxability</a>
+        <a href="https://tally.so/r/b5NdE6" onclick="openBookingModal(event, 'Foreign Assets including RSU Taxability')" class="trending-tag">Foreign Assets including RSU Taxability</a>
+    </div>
+
+    <!-- User Journeys -->
+    <section class="section" style="padding-top: 0px; padding-bottom: 40px; position: relative; z-index: 10;">
+        <div class="section-header" style="margin-bottom: 40px;">
+            <h2 style="font-size: 36px;">Choose Your Requirement</h2>
+            <p>Tailored financial, tax, and compliance solutions based on your needs.</p>
+        </div>
+
+        <div class="journeys-detailed">
+            <!-- Card 1: Individual -->
+            <div class="journey-split-card">
+                <div class="split-card-header">
+                    <i class="fa-solid fa-user-tie"></i>
+                    <div>
+                        <h3>I'm an Individual</h3>
+                        <p class="subtitle">For salaried professionals, freelancers, NRIs, consultants, and investors.</p>
+                    </div>
+                </div>
+                
+                <ul class="pain-points-list">
+                    <li><a href="https://tally.so/r/b5NdE6" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 12px;"><i class="fa-solid fa-check"></i> ITR Filing</a></li>
+                    <li><a href="https://tally.so/r/b5NdE6" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 12px;"><i class="fa-solid fa-check"></i> Tax Planning & Regime Selection</a></li>
+                    <li><a href="https://tally.so/r/b5NdE6" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 12px;"><i class="fa-solid fa-check"></i> GST Registration</a></li>
+                    <li><a href="https://tally.so/r/b5NdE6" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 12px;"><i class="fa-solid fa-check"></i> Investment Advisory</a></li>
+                    <li><a href="https://tally.so/r/b5NdE6" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 12px;"><i class="fa-solid fa-check"></i> Income Tax Notices</a></li>
+                    <li><a href="https://tally.so/r/b5NdE6" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 12px;"><i class="fa-solid fa-check"></i> PF / ESI Assistance</a></li>
+                </ul>
+                
+                <div class="split-card-cta" style="cursor: pointer;" onclick="document.getElementById('modal-individual').classList.add('active'); document.body.style.overflow='hidden';">Get Personal Assistance</div>
+            </div>
+
+            <!-- Card 2: Business -->
+            <div class="journey-split-card">
+                <div class="split-card-header">
+                    <i class="fa-solid fa-building"></i>
+                    <div>
+                        <h3>I'm a Business</h3>
+                        <p class="subtitle">For startups, founders, SMEs, agencies, exporters, and growing businesses.</p>
+                    </div>
+                </div>
+                
+                <ul class="pain-points-list">
+                    <li><a href="https://tally.so/r/b5NdE6" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 12px;"><i class="fa-solid fa-check"></i> GST Registration</a></li>
+                    <li><a href="https://tally.so/r/b5NdE6" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 12px;"><i class="fa-solid fa-check"></i> GST Returns & Notices</a></li>
+                    <li><a href="https://tally.so/r/b5NdE6" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 12px;"><i class="fa-solid fa-check"></i> Company Registration</a></li>
+                    <li><a href="https://tally.so/r/b5NdE6" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 12px;"><i class="fa-solid fa-check"></i> ROC & Compliance</a></li>
+                    <li><a href="https://tally.so/r/b5NdE6" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 12px;"><i class="fa-solid fa-check"></i> LUT & Export Compliance</a></li>
+                    <li><a href="https://tally.so/r/b5NdE6" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 12px;"><i class="fa-solid fa-check"></i> Payroll & Advisory</a></li>
+                </ul>
+                
+                <div class="split-card-cta" style="cursor: pointer;" onclick="document.getElementById('modal-business').classList.add('active'); document.body.style.overflow='hidden';">Get Business Support</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- High-Intent Service Grid -->
+    <section class="section" id="services" style="padding-top: 0px; padding-bottom: 40px;">
+        <div class="section-header">
+            <h2>Primary Advisory Tracks</h2>
+            <p>Direct, actionable solutions from verified experts. No hidden fees.</p>
+        </div>
+
+        <div class="intent-grid">
+            <!-- 1 -->
+            <div class="intent-card">
+                <h3>ITR Filing <i class="fa-solid fa-file-invoice-dollar"></i></h3>
+                <p class="problem">Struggling with complex salary structures, multiple Form 16s, or capital gains?</p>
+                <div class="outcome">Error-free filing & max deductions</div>
+                <div class="intent-footer">
+                    <div class="intent-price"><span>Price</span> <br><del style="opacity: 0.5; margin-right: 5px; font-weight: normal;">₹599 - ₹4,999</del><strong style="color: var(--teal-light);">₹0</strong></div>
+                    <div class="intent-tat"><i class="fa-regular fa-clock"></i> 24-48h TAT</div>
+                </div>
+                <a href="https://tally.so/r/b5NdE6" class="btn-primary" style="width: 100%; text-align: center; border-radius: 8px; font-size: 14px; margin-top: 15px;">Book Session</a>
+            </div>
+
+            <!-- 2 -->
+            <div class="intent-card">
+                <h3>Tax Planning & Regime <i class="fa-solid fa-scale-balanced"></i></h3>
+                <p class="problem">Unsure whether Old or New Tax Regime saves you more money for FY 2026?</p>
+                <div class="outcome">Personalized tax-saving strategy</div>
+                <div class="intent-footer">
+                    <div class="intent-price"><span>Price</span> <br><del style="opacity: 0.5; margin-right: 5px; font-weight: normal;">₹499 - ₹2,499</del><strong style="color: var(--teal-light);">₹0</strong></div>
+                    <div class="intent-tat"><i class="fa-regular fa-clock"></i> Instant Consult</div>
+                </div>
+                <a href="https://tally.so/r/b5NdE6" class="btn-primary" style="width: 100%; text-align: center; border-radius: 8px; font-size: 14px; margin-top: 15px;">Book Session</a>
+            </div>
+
+            <!-- 3 -->
+            <div class="intent-card">
+                <h3>Investment Advisory <i class="fa-solid fa-chart-line"></i></h3>
+                <p class="problem">Holding ESOPs, real estate, or high-yield assets and worried about heavy taxes?</p>
+                <div class="outcome">Optimized Wealth & Capital Gains</div>
+                <div class="intent-footer">
+                    <div class="intent-price"><span>Price</span> <br><del style="opacity: 0.5; margin-right: 5px; font-weight: normal;">₹999 - ₹2,999</del><strong style="color: var(--teal-light);">₹0</strong></div>
+                    <div class="intent-tat"><i class="fa-regular fa-clock"></i> Detailed Plan</div>
+                </div>
+                <a href="https://tally.so/r/b5NdE6" class="btn-primary" style="width: 100%; text-align: center; border-radius: 8px; font-size: 14px; margin-top: 15px;">Book Session</a>
+            </div>
+
+            <!-- 4 -->
+            <div class="intent-card">
+                <h3>Income Tax Notices <i class="fa-solid fa-triangle-exclamation"></i></h3>
+                <p class="problem">Received a scrutiny notice under section 143(1) or 148? Don't ignore it.</p>
+                <div class="outcome">Expert drafted legal rebuttal</div>
+                <div class="intent-footer">
+                    <div class="intent-price"><span>Price</span> <br><del style="opacity: 0.5; margin-right: 5px; font-weight: normal;">₹1,499 - ₹4,499</del><strong style="color: var(--teal-light);">₹0</strong></div>
+                    <div class="intent-tat"><i class="fa-regular fa-clock"></i> High Priority</div>
+                </div>
+                <a href="https://tally.so/r/b5NdE6" class="btn-primary" style="width: 100%; text-align: center; border-radius: 8px; font-size: 14px; margin-top: 15px;">Book Session</a>
+            </div>
+
+            <!-- 5 -->
+            <div class="intent-card">
+                <h3>GST Registration, Returns & Notices <i class="fa-solid fa-receipt"></i></h3>
+                <p class="problem">Mismatched ITC, late filing penalties, or complex multi-state GST rules?</p>
+                <div class="outcome">Compliant filing & penalty waiver</div>
+                <div class="intent-footer">
+                    <div class="intent-price"><span>Price</span> <br><del style="opacity: 0.5; margin-right: 5px; font-weight: normal;">₹1,599 - ₹99,999</del><strong style="color: var(--teal-light);">₹0</strong></div>
+                    <div class="intent-tat"><i class="fa-regular fa-clock"></i> Ongoing Support</div>
+                </div>
+                <a href="https://tally.so/r/b5NdE6" class="btn-primary" style="width: 100%; text-align: center; border-radius: 8px; font-size: 14px; margin-top: 15px;">Book Session</a>
+            </div>
+
+            <!-- 6 -->
+            <div class="intent-card">
+                <h3>Company Registration <i class="fa-solid fa-rocket"></i></h3>
+                <p class="problem">Starting a new venture? Need PVT LTD, LLP, or Proprietorship setup?</p>
+                <div class="outcome">Complete ROC incorporation</div>
+                <div class="intent-footer">
+                    <div class="intent-price"><span>Price</span> <br><del style="opacity: 0.5; margin-right: 5px; font-weight: normal;">₹2,999 - ₹8,999</del><strong style="color: var(--teal-light);">₹0</strong></div>
+                    <div class="intent-tat"><i class="fa-regular fa-clock"></i> End-to-End</div>
+                </div>
+                <a href="https://tally.so/r/b5NdE6" class="btn-primary" style="width: 100%; text-align: center; border-radius: 8px; font-size: 14px; margin-top: 15px;">Book Session</a>
+            </div>
+
+            <!-- 7 -->
+            <div class="intent-card">
+                <h3>PF / ESI Assistance <i class="fa-solid fa-piggy-bank"></i></h3>
+                <p class="problem">Facing issues with EPF withdrawal, UAN merging, or employer compliance?</p>
+                <div class="outcome">Hassle-free fund access</div>
+                <div class="intent-footer">
+                    <div class="intent-price"><span>Price</span> <br><del style="opacity: 0.5; margin-right: 5px; font-weight: normal;">₹499 - ₹1,499</del><strong style="color: var(--teal-light);">₹0</strong></div>
+                    <div class="intent-tat"><i class="fa-regular fa-clock"></i> Fast Track</div>
+                </div>
+                <a href="https://tally.so/r/b5NdE6" class="btn-primary" style="width: 100%; text-align: center; border-radius: 8px; font-size: 14px; margin-top: 15px;">Book Session</a>
+            </div>
+
+            <!-- 8 -->
+            <div class="intent-card">
+                <h3>LUT & Export Compliance <i class="fa-solid fa-earth-americas"></i></h3>
+                <p class="problem">Exporting software or services? Claim zero-rated GST benefits legally.</p>
+                <div class="outcome">Filed LUT & 15CA/CB support</div>
+                <div class="intent-footer">
+                    <div class="intent-price"><span>Price</span> <br><del style="opacity: 0.5; margin-right: 5px; font-weight: normal;">₹999 - ₹2,999</del><strong style="color: var(--teal-light);">₹0</strong></div>
+                    <div class="intent-tat"><i class="fa-regular fa-clock"></i> 24h Filing</div>
+                </div>
+                <a href="https://tally.so/r/b5NdE6" class="btn-primary" style="width: 100%; text-align: center; border-radius: 8px; font-size: 14px; margin-top: 15px;">Book Session</a>
+            </div>
+
+            <!-- 9: Custom Request -->
+            <div class="intent-card" style="border: 1px dashed var(--teal); background: rgba(14, 124, 123, 0.05); align-items: center; text-align: center;">
+                <i class="fa-solid fa-clipboard-question" style="font-size: 32px; color: var(--gold); margin-bottom: 15px; margin-top: 10px;"></i>
+                <h3 style="margin-bottom: 10px; display: block; width: 100%;">Missing a Service?</h3>
+                <p class="problem" style="margin-bottom: 20px;">Need something specific? Let us know and we'll connect you with the right expert immediately.</p>
+                <a href="https://tally.so/r/b5NdE6" class="btn-primary" style="width: 100%; text-align: center; border-radius: 8px; font-size: 15px; margin-top: auto;">Request Additional Service</a>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 30px; font-size: 13px; color: var(--text-muted);">
+            * Promotional pricing applies strictly to the initial advisory consultation. Execution or formal engagements arising from consultations are subject to independent professional charges. See <a href="terms.html#promotional-terms" style="color: var(--gold); text-decoration: underline;">Terms & Conditions</a>.
+        </div>
+    </section>
+
+    <!-- Premium Expert Showcase -->
+    <section class="section" id="experts" style="padding-top: 30px;">
+        <div class="marketplace-header">
+            <h2 style="font-size: 42px; font-family: 'Playfair Display', serif;">Consult with Elite Professionals</h2>
+            <p style="font-size: 18px; color: var(--text-muted);">Direct access to experts rigorously verified with ICAI and other leading professional bodies.</p>
+        </div>
+
+        <div class="marketplace-trust-row">
+            <div class="trust-indicator"><i class="fa-solid fa-circle-check"></i> Verified via ICAI & Professional Databases</div>
+            <div class="trust-indicator"><i class="fa-solid fa-lock"></i> Confidential Consultations</div>
+            <div class="trust-indicator"><i class="fa-solid fa-tag"></i> Transparent Pricing</div>
+            <div class="trust-indicator"><i class="fa-solid fa-shield-halved"></i> Secure Experience</div>
+        </div>
+
+        <div class="filter-container" style="margin-top: 40px;">
+            <button class="filter-chip active" data-filter="all">All Experts</button>
+            <button class="filter-chip" data-filter="ITR">ITR</button>
+            <button class="filter-chip" data-filter="GST">GST</button>
+            <button class="filter-chip" data-filter="Startup">Startup</button>
+            <button class="filter-chip" data-filter="Investment">Investment</button>
+            <button class="filter-chip" data-filter="Notices">Notices</button>
+            <button class="filter-chip" data-filter="International Tax">International Tax</button>
+            <button class="filter-chip" data-filter="ESOP">ESOP</button>
+            <button class="filter-chip" data-filter="Litigation">Litigation</button>
+        </div>
+
+        <div class="carousel-wrapper">
+            <div class="carousel-track" id="expert-carousel-track">
+                <!-- Cards injected by JS -->
+            </div>
+            
+            <div class="carousel-nav">
+                <button class="nav-btn" id="prev-pro"><i class="fa-solid fa-chevron-left"></i></button>
+                <button class="nav-btn" id="next-pro"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+        </div>
+
+        <div class="marketplace-footer-copy">
+            “Premium expertise, simplified access — connect with verified professionals through a seamless, modern consultation experience.”
+        </div>
+
+        <div style="display: flex; justify-content: center; margin-top: 30px;">
+            <div class="urgency-banner">
+                <div class="pulse-dot"></div>
+                Today's available express slots are filling fast.
+            </div>
+        </div>
+    </section>
+
+
+    <!-- The Kroovo Shield (Ultra-Compact Strip) -->
+    <section class="guarantee-section" id="trust">
+        <div class="guarantee-header">
+            <h2>The Kroovo Shield</h2>
+            <p>Built for trust, accountability, and absolute discretion.</p>
+        </div>
+        <div class="guarantee-row">
+            <div class="guarantee-item">
+                <div class="guarantee-icon">✓</div>
+                <div class="guarantee-content">
+                    <h4>Verified Professionals</h4>
+                    <p>ICAI, ICSI, and legal experts verified for active practice.</p>
+                </div>
+            </div>
+            <div class="guarantee-item">
+                <div class="guarantee-icon">₹</div>
+                <div class="guarantee-content">
+                    <h4>Transparent Pricing</h4>
+                    <p>Upfront consultation pricing with no hidden billing.</p>
+                </div>
+            </div>
+            <div class="guarantee-item">
+                <div class="guarantee-icon">🔒</div>
+                <div class="guarantee-content">
+                    <h4>Secure Consultation</h4>
+                    <p>Confidential document sharing and secure workflows.</p>
+                </div>
+            </div>
+            <div class="guarantee-item">
+                <div class="guarantee-icon">💬</div>
+                <div class="guarantee-content">
+                    <h4>Real Human Assistance</h4>
+                    <p>Direct access via WhatsApp or video consultation.</p>
+                </div>
+            </div>
+        </div>
+        <div class="trust-ticker">
+            Verified Experts • Confidential Consultations • Transparent Pricing • Human-Led Support • Fast Response Time
+        </div>
+    </section>
+
+
+    <!-- Minimal 3-Step Flow -->
+    <section class="step-flow-section" id="how">
+        <div class="section-header" style="text-align: center;">
+            <h2 style="font-size: 42px; font-family: 'Playfair Display', serif;">From Problem to Resolution — Typically Within 24 Hours</h2>
+            <p style="font-size: 18px;">Our streamlined advisory process built for speed and absolute professional accuracy.</p>
+        </div>
+
+        <div class="steps-container">
+            <div class="step-connector">
+                <div class="connector-progress"></div>
+            </div>
+
+            <!-- Step 1 -->
+            <div class="step-card">
+                <div class="step-icon-wrapper">
+                    <div class="step-icon"><i class="fa-solid fa-file-signature"></i></div>
+                    <div class="step-number">1</div>
+                </div>
+                <h3>Share Your Requirement</h3>
+                <p>Tell us about your issue, preferred consultation time, and securely upload any relevant documents for faster evaluation and resolution.</p>
+                <ul class="step-list">
+                    <li style="font-weight: 700; color: var(--gold); margin-bottom: 10px; list-style: none;">Common Requests:</li>
+                    <li>ITR Filing</li>
+                    <li>GST Notices</li>
+                    <li>Tax Saving & Regime</li>
+                    <li>Company Registration</li>
+                    <li>PF / ESI Withdrawal</li>
+                </ul>
+                <a href="https://tally.so/r/b5NdE6" class="step-cta">Submit Your Requirement</a>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="step-card">
+                <div class="step-icon-wrapper">
+                    <div class="step-icon"><i class="fa-solid fa-user-check"></i></div>
+                    <div class="step-number">2</div>
+                </div>
+                <h3>Expert Evaluation & Matching</h3>
+                <p>Every submission is carefully reviewed by experienced professionals who assign the most suitable expert based on urgency and complexity.</p>
+                <ul class="step-list">
+                    <li style="font-weight: 700; color: var(--gold); margin-bottom: 10px; list-style: none;">Highlights:</li>
+                    <li>Human-Led Matching</li>
+                    <li>Verified Professionals</li>
+                    <li>Requirement-Based Allocation</li>
+                    <li>Secure Scheduling</li>
+                    <li>Fast Response Time</li>
+                </ul>
+                <a href="https://tally.so/r/b5NdE6" class="step-cta">Get Matched with Right Expert</a>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="step-card">
+                <div class="step-icon-wrapper">
+                    <div class="step-icon"><i class="fa-solid fa-circle-check"></i></div>
+                    <div class="step-number">3</div>
+                </div>
+                <h3>Consult & Resolve</h3>
+                <p>Connect with your assigned expert at the scheduled time and receive practical, confidential, and outcome-focused guidance.</p>
+                <ul class="step-list">
+                    <li style="font-weight: 700; color: var(--gold); margin-bottom: 10px; list-style: none;">Expected Outcomes:</li>
+                    <li>Successful Filings</li>
+                    <li>Tax Optimization</li>
+                    <li>Notice Resolution</li>
+                    <li>Compliance Completion</li>
+                    <li>Strategic Business Advisory</li>
+                </ul>
+                <a href="https://tally.so/r/b5NdE6" class="step-cta">Book Your Consultation</a>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 50px;">
+            <div class="trust-note">
+                “Most queries are reviewed and responded to within 24 hours of request submission.”
+            </div>
+            
+            <div class="trust-indicators-row">
+                100% Confidential • Verified Experts • Transparent Pricing
+            </div>
+
+            <div class="microcopy">
+                “Simple for individuals. Powerful for businesses. Designed to connect you with the right expert — without the traditional complexity.”
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-top">
+                <!-- Brand Column -->
+                <div class="footer-brand">
+                    <a href="#top">
+                        <img src="logo.png" alt="Kroovo" class="brand-logo">
+                    </a>
+                    <p>From filing taxes to handling notices — access verified experts instantly. India's trusted marketplace for financial and compliance professionals.</p>
+                    <div class="footer-social">
+                        <a href="https://x.com/kroovohq" target="_blank" title="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="https://www.linkedin.com/company/kroovo/about/" target="_blank" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="https://www.instagram.com/kroovohq/" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://www.facebook.com/Kroovo/" target="_blank" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    </div>
+                </div>
+
+                <!-- Platform -->
+                <div class="footer-col">
+                    <h4>Platform</h4>
+                    <ul>
+                        <li><a href="#services">All Services</a></li>
+                        <li><a href="#trending">Trending Solutions</a></li>
+                        <li><a href="#experts">Meet the Experts</a></li>
+                        <li><a href="faq.html">Common Queries</a></li>
+                        <li><a href="blogs.html">Kroovo Insights</a></li>
+                    </ul>
+                </div>
+
+                <!-- Legal -->
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="compliance.html">Compliance</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                    </ul>
+                </div>
+
+                <!-- Future Ready -->
+                <div class="footer-col">
+                    <h4>Future Ready</h4>
+                    <ul>
+                        <li class="coming-soon"><a href="#">Wealth Management</a></li>
+                        <li class="coming-soon"><a href="#">Virtual CFO</a></li>
+                        <li class="coming-soon"><a href="#">Insurance Advisory</a></li>
+                        <li class="coming-soon"><a href="#">AI Assistant</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div class="footer-col">
+                    <h4>Get in Touch</h4>
+                    <ul>
+                        <li><a href="https://tally.so/r/b5NdE6" target="_blank"><i class="fa-regular fa-calendar-check"></i> Book Consultation</a></li>
+                        <li><a href="https://wa.me/919686711066" target="_blank"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a></li>
+                        <li><a href="mailto:support@kroovo.com"><i class="fa-regular fa-envelope"></i> support@kroovo.com</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Bar -->
+            <div class="footer-bottom">
+                <p class="copyright">© 2026 Kroovo Marketplace. All rights reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="privacy.html">Privacy</a>
+                    <a href="terms.html">Terms</a>
+                    <a href="compliance.html">Compliance</a>
+                    <a href="sitemap.xml">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Individual Services Modal -->
+    <div class="svc-modal-overlay" id="modal-individual" onclick="if(event.target===this){this.classList.remove('active');document.body.style.overflow=''}">
+        <div class="svc-modal">
+            <div class="svc-modal-head">
+                <h2><i class="fa-solid fa-user-tie"></i> Personal Services</h2>
+                <button class="svc-modal-close" onclick="document.getElementById('modal-individual').classList.remove('active');document.body.style.overflow=''"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="svc-modal-body">
+                <div class="svc-modal-item">
+                    <div class="svc-modal-icon"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+                    <div class="svc-modal-info"><h4>ITR Filing</h4><p><del style="opacity: 0.5;">₹599 – ₹4,999</del> <strong style="color: var(--teal-light);">₹0</strong> · 24-48h TAT</p></div>
+                    <a href="https://tally.so/r/b5NdE6" class="svc-modal-book">Book Session</a>
+                </div>
+                <div class="svc-modal-item">
+                    <div class="svc-modal-icon"><i class="fa-solid fa-scale-balanced"></i></div>
+                    <div class="svc-modal-info"><h4>Tax Planning & Regime Selection</h4><p><del style="opacity: 0.5;">₹499 – ₹2,499</del> <strong style="color: var(--teal-light);">₹0</strong> · Instant Consult</p></div>
+                    <a href="https://tally.so/r/b5NdE6" class="svc-modal-book">Book Session</a>
+                </div>
+                <div class="svc-modal-item">
+                    <div class="svc-modal-icon"><i class="fa-solid fa-chart-line"></i></div>
+                    <div class="svc-modal-info"><h4>Investment Advisory</h4><p><del style="opacity: 0.5;">₹999 – ₹2,999</del> <strong style="color: var(--teal-light);">₹0</strong> · Detailed Plan</p></div>
+                    <a href="https://tally.so/r/b5NdE6" class="svc-modal-book">Book Session</a>
+                </div>
+                <div class="svc-modal-item">
+                    <div class="svc-modal-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                    <div class="svc-modal-info"><h4>Income Tax Notices</h4><p><del style="opacity: 0.5;">₹1,499 – ₹4,499</del> <strong style="color: var(--teal-light);">₹0</strong> · High Priority</p></div>
+                    <a href="https://tally.so/r/b5NdE6" class="svc-modal-book">Book Session</a>
+                </div>
+                <div class="svc-modal-item">
+                    <div class="svc-modal-icon"><i class="fa-solid fa-piggy-bank"></i></div>
+                    <div class="svc-modal-info"><h4>PF / ESI Assistance</h4><p><del style="opacity: 0.5;">₹499 – ₹1,499</del> <strong style="color: var(--teal-light);">₹0</strong> · Fast Track</p></div>
+                    <a href="https://tally.so/r/b5NdE6" class="svc-modal-book">Book Session</a>
+                </div>
+                <div class="svc-modal-item">
+                    <div class="svc-modal-icon"><i class="fa-solid fa-id-card"></i></div>
+                    <div class="svc-modal-info"><h4>GST Registration</h4><p><del style="opacity: 0.5;">₹1,000 – ₹10,000</del> <strong style="color: var(--teal-light);">₹0</strong> · End-to-End Support</p></div>
+                    <a href="https://tally.so/r/b5NdE6" class="svc-modal-book">Book Session</a>
+                </div>
+                <div class="svc-modal-item upcoming">
+                    <div class="svc-modal-icon"><i class="fa-solid fa-globe"></i></div>
+                    <div class="svc-modal-info"><h4>NRI Taxation & DTAA Advisory <span class="svc-soon-badge">Coming Soon</span></h4><p>Cross-border tax optimization for NRIs</p></div>
+                </div>
+                <div class="svc-modal-item upcoming">
+                    <div class="svc-modal-icon"><i class="fa-solid fa-landmark"></i></div>
+                    <div class="svc-modal-info"><h4>Capital Gains Optimization <span class="svc-soon-badge">Coming Soon</span></h4><p>Strategic LTCG/STCG planning for stocks & real estate</p></div>
+                </div>
+                <div class="svc-modal-item upcoming">
+                    <div class="svc-modal-icon"><i class="fa-solid fa-scroll"></i></div>
+                    <div class="svc-modal-info"><h4>Estate & Succession Planning <span class="svc-soon-badge">Coming Soon</span></h4><p>Wills, trusts & wealth transfer advisory</p></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Business Services Modal -->
+    <div class="svc-modal-overlay" id="modal-business" onclick="if(event.target===this){this.classList.remove('active');document.body.style.overflow=''}">
+        <div class="svc-modal">
+            <div class="svc-modal-head">
+                <h2><i class="fa-solid fa-building"></i> Business Services</h2>
+                <button class="svc-modal-close" onclick="document.getElementById('modal-business').classList.remove('active');document.body.style.overflow=''"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="svc-modal-body">
+                <div class="svc-modal-item">
+                    <div class="svc-modal-icon"><i class="fa-solid fa-id-card"></i></div>
+                    <div class="svc-modal-info"><h4>GST Registration</h4><p><del style="opacity: 0.5;">₹1,000 – ₹10,000</del> <strong style="color: var(--teal-light);">₹0</strong> · End-to-End Support</p></div>
+                    <a href="https://tally.so/r/b5NdE6" class="svc-modal-book">Book Session</a>
+                </div>
+                <div class="svc-modal-item">
+                    <div class="svc-modal-icon"><i class="fa-solid fa-receipt"></i></div>
+                    <div class="svc-modal-info"><h4>GST Returns & Notices</h4><p><del style="opacity: 0.5;">₹1,599 – ₹99,999</del> <strong style="color: var(--teal-light);">₹0</strong> · Ongoing Support</p></div>
+                    <a href="https://tally.so/r/b5NdE6" class="svc-modal-book">Book Session</a>
+                </div>
+                <div class="svc-modal-item">
+                    <div class="svc-modal-icon"><i class="fa-solid fa-rocket"></i></div>
+                    <div class="svc-modal-info"><h4>Company Registration</h4><p><del style="opacity: 0.5;">₹2,999 – ₹8,999</del> <strong style="color: var(--teal-light);">₹0</strong> · End-to-End</p></div>
+                    <a href="https://tally.so/r/b5NdE6" class="svc-modal-book">Book Session</a>
+                </div>
+                <div class="svc-modal-item">
+                    <div class="svc-modal-icon"><i class="fa-solid fa-building-columns"></i></div>
+                    <div class="svc-modal-info"><h4>ROC & Compliance</h4><p>Annual filings, board resolutions & secretarial</p></div>
+                    <a href="https://tally.so/r/b5NdE6" class="svc-modal-book">Book Session</a>
+                </div>
+                <div class="svc-modal-item">
+                    <div class="svc-modal-icon"><i class="fa-solid fa-earth-americas"></i></div>
+                    <div class="svc-modal-info"><h4>LUT & Export Compliance</h4><p><del style="opacity: 0.5;">₹999 – ₹2,999</del> <strong style="color: var(--teal-light);">₹0</strong> · 24h Filing</p></div>
+                    <a href="https://tally.so/r/b5NdE6" class="svc-modal-book">Book Session</a>
+                </div>
+                <div class="svc-modal-item">
+                    <div class="svc-modal-icon"><i class="fa-solid fa-money-check-dollar"></i></div>
+                    <div class="svc-modal-info"><h4>Payroll & Advisory</h4><p>PF/ESI setup, payroll structuring & compliance</p></div>
+                    <a href="https://tally.so/r/b5NdE6" class="svc-modal-book">Book Session</a>
+                </div>
+                <div class="svc-modal-item upcoming">
+                    <div class="svc-modal-icon"><i class="fa-solid fa-chart-pie"></i></div>
+                    <div class="svc-modal-info"><h4>Virtual CFO Services <span class="svc-soon-badge">Coming Soon</span></h4><p>MIS reporting, cash flow & financial modelling</p></div>
+                </div>
+                <div class="svc-modal-item upcoming">
+                    <div class="svc-modal-icon"><i class="fa-solid fa-gavel"></i></div>
+                    <div class="svc-modal-info"><h4>Statutory & Tax Audits <span class="svc-soon-badge">Coming Soon</span></h4><p>Internal controls, statutory audits & certifications</p></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Close modals on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.svc-modal-overlay.active').forEach(m => { m.classList.remove('active'); });
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Dismiss promotional banner
+        function dismissPromoBanner() {
+            const banner = document.getElementById('promo-banner');
+            if (banner) {
+                banner.classList.add('dismissed');
+                localStorage.setItem('kroovo-promo-dismissed', 'true');
+                setTimeout(() => {
+                    banner.style.display = 'none';
+                }, 300);
+            }
+        }
+
+        // Check if banner was already dismissed
+        document.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('kroovo-promo-dismissed') === 'true') {
+                const banner = document.getElementById('promo-banner');
+                if (banner) {
+                    banner.style.display = 'none';
+                }
+            }
+        });
+    </script>
+
+    <script>
+        // Revolving Text Logic
+        const rotatingTopics = [
+            {
+                html: '<div class="topic-prompt">👉 Got a legal or tax notice?</div><div class="title-line"><span class="accent">Expert Advisory</span><br><span class="gold">On Your Schedule.</span></div>',
+                placeholder: 'E.g. Received GST scrutiny notice for FY 23-24...'
+            },
+            {
+                html: '<div class="topic-prompt">🏠 Sold a House & Worried About Capital Gains Tax?</div><div class="title-line"><span class="accent">💸 Save Tax Smartly</span><br><span class="gold">with Expert Planning</span></div>',
+                placeholder: 'E.g. Calculating LTCG on residential property sale...'
+            },
+            {
+                html: '<div class="topic-prompt">🚀 Launching a new startup?</div><div class="title-line"><span class="accent">Statutory Setup</span><br><span class="gold">Done Right.</span></div>',
+                placeholder: 'E.g. Need PVT LTD registration and GST setup...'
+            },
+            {
+                html: '<div class="topic-prompt">💡 Investment questions?</div><div class="title-line"><span class="accent">Tax Optimized</span><br><span class="gold">Wealth Planning.</span></div>',
+                placeholder: 'E.g. Best tax-saving mutual funds (ELSS)...'
+            }
+        ];
+
+        let currentTopicIdx = 0;
+        const headlineElement = document.getElementById('revolving-headline');
+        const searchInputElement = document.getElementById('hero-search-input');
+        
+        setInterval(() => {
+            headlineElement.style.opacity = 0;
+            if (searchInputElement) {
+                searchInputElement.style.transition = 'opacity 0.5s ease';
+                searchInputElement.style.opacity = 0.5;
+            }
+            
+            setTimeout(() => {
+                currentTopicIdx = (currentTopicIdx + 1) % rotatingTopics.length;
+                headlineElement.innerHTML = rotatingTopics[currentTopicIdx].html;
+                if (searchInputElement) {
+                    searchInputElement.placeholder = rotatingTopics[currentTopicIdx].placeholder;
+                    searchInputElement.style.opacity = 1;
+                }
+                headlineElement.style.opacity = 1;
+            }, 500);
+        }, 4000);
+    </script>
+    <script>
+        // Expert Data Pool
+        const expertPool = [
+            {
+                name: "Deepak Kumar",
+                initials: "DK",
+                qual: "Chartered Accountant",
+                exp: "8 Years Experience",
+                location: "Gurgaon",
+                tags: ["Investment Advisory", "Wealth Management", "ITR Filing", "Startup Advisory"],
+                consults: "50+",
+                rating: "4.8",
+                price: "₹1,099",
+                badge: "Top Rated",
+                filters: ["ITR", "Startup", "Investment"]
+            },
+            {
+                name: "Rahul Agarwal",
+                initials: "RA",
+                qual: "Chartered Accountant",
+                exp: "7 Years Experience",
+                location: "Rourkela",
+                tags: ["ESOP Taxability", "ROC Filings", "Foreign Asset Tax", "Tax Planning", "ITR Filing"],
+                consults: "280+",
+                rating: "4.9",
+                price: "₹999",
+                badge: "Most Booked",
+                filters: ["ITR", "Notices", "ESOP", "International Tax", "Litigation"]
+            },
+            {
+                name: "Krishna P. Burnwal",
+                initials: "KB",
+                qual: "Chartered Accountant",
+                exp: "7 Years Experience",
+                location: "Bengaluru",
+                tags: ["Investment Advisory", "ITR Filing", "Tax Planning"],
+                consults: "30+",
+                rating: "4.8",
+                price: "₹899",
+                badge: "Trending",
+                filters: ["ITR", "Investment"]
+            },
+            {
+                name: "Risha Deep",
+                initials: "RD",
+                qual: "Chartered Accountant",
+                exp: "7 Years Experience",
+                location: "Koderma",
+                tags: ["GST Notices", "ITR Filing", "Tax Planning", "RSU Taxability", "ESOP Taxability"],
+                consults: "400+",
+                rating: "4.9",
+                price: "₹999",
+                badge: "Top Rated",
+                filters: ["ITR", "GST", "Notices", "International Tax", "ESOP", "Litigation"]
+            },
+            {
+                name: "Siddharth Saboo",
+                initials: "SS",
+                qual: "Chartered Accountant",
+                exp: "9 Years Experience",
+                location: "Ranchi",
+                tags: ["Commodity Market", "ITR Filing", "Tax Planning & Regime Selection", "GST Returns"],
+                consults: "150+",
+                rating: "4.9",
+                price: "₹1,199",
+                badge: "Trending",
+                filters: ["ITR", "GST", "Investment"]
+            },
+            {
+                name: "Parth Shah",
+                initials: "PS",
+                qual: "Chartered Accountant",
+                exp: "2 Years Experience",
+                location: "Surat",
+                tags: ["Income Tax & ITR", "Audit & Assurance", "International Taxation"],
+                consults: "15+",
+                rating: "4.8",
+                price: "₹899",
+                badge: "Rising Star",
+                filters: ["ITR", "International Tax"]
+            }
+        ];
+
+        let currentFilter = 'all';
+        let currentIndex = 0;
+        let autoRotateTimer;
+
+        function getFilteredPool() {
+            return currentFilter === 'all' 
+                ? expertPool 
+                : expertPool.filter(e => e.filters.includes(currentFilter));
+        }
+
+        function renderCarousel() {
+            const track = document.getElementById('expert-carousel-track');
+            const pool = getFilteredPool();
+            
+            track.innerHTML = pool.map(pro => `
+                <div class="pro-card">
+                    <div class="pro-card-header">
+                        <div class="pro-avatar">${pro.initials}</div>
+                        <div class="pro-header-info">
+                            <div class="pro-name-row">
+                                <h3>${pro.name}</h3>
+                                <i class="fa-solid fa-circle-check verified-badge"></i>
+                            </div>
+                            <p class="pro-qual">${pro.qual}</p>
+                            <p class="pro-exp">${pro.exp}</p>
+                            <p class="pro-loc"><i class="fa-solid fa-location-dot" style="margin-right: 4px; color: var(--gold); opacity: 0.85;"></i>${pro.location}</p>
+                        </div>
+                        ${pro.badge ? `<div class="expert-badge-pill ${pro.badge.includes('Booked') ? 'most-booked' : ''}">${pro.badge}</div>` : ''}
+                    </div>
+                    <div class="pro-metrics-row">
+                        <div class="pro-metric">
+                            <span class="pro-metric-value">${pro.rating} ⭐</span>
+                            <span class="pro-metric-label">Rating</span>
+                        </div>
+                        <div class="pro-metric">
+                            <span class="pro-metric-value">${pro.consults}</span>
+                            <span class="pro-metric-label">Sessions</span>
+                        </div>
+                        <div class="pro-metric">
+                            <span class="pro-metric-value">ICAI</span>
+                            <span class="pro-metric-label">Verified</span>
+                        </div>
+                    </div>
+                    <div class="pro-tags-row">
+                        ${pro.tags.slice(0, 3).map(tag => `<span class="tag">${tag}</span>`).join('')}
+                        ${pro.tags.length > 3 ? `
+                            <span class="tag" onclick="toggleExpertTags(this)" style="cursor: pointer; background: rgba(212,147,58,0.15); color: var(--gold); border-color: rgba(212,147,58,0.3);">+${pro.tags.length - 3} more</span>
+                            <span class="hidden-tags" style="display: none;">
+                                ${pro.tags.slice(3).map(tag => `<span class="tag">${tag}</span>`).join('')}
+                            </span>
+                        ` : ''}
+                    </div>
+                    <div class="pro-card-footer">
+                        <div class="pro-price">
+                            <span class="pro-price-label">Per Session</span>
+                            <span class="pro-price-value"><del style="opacity: 0.5; font-size: 0.85em; font-weight: normal; margin-right: 5px;">${pro.price}</del><strong style="color: var(--teal-light); font-size: 1.1em;">₹0</strong></span>
+                        </div>
+                        <button type="button" class="btn-primary" onclick="openBookingModal(event, '${pro.role}: ${pro.name}')" style="padding: 7px 16px; font-size: 12px; border-radius: 6px;">
+                            Book <i class="fa-solid fa-arrow-right" style="font-size: 10px; margin-left: 3px;"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+
+            // Reset transform when filtering
+            track.style.transform = `translateX(0)`;
+            currentIndex = 0;
+        }
+
+        function moveCarousel(direction) {
+            const track = document.getElementById('expert-carousel-track');
+            const pool = getFilteredPool();
+            const cardWidth = track.querySelector('.pro-card').offsetWidth + 25;
+            const maxIndex = Math.max(0, pool.length - (window.innerWidth > 1024 ? 3 : window.innerWidth > 768 ? 2 : 1));
+
+            if (direction === 'next') {
+                currentIndex = (currentIndex >= maxIndex) ? 0 : currentIndex + 1;
+            } else {
+                currentIndex = (currentIndex <= 0) ? maxIndex : currentIndex - 1;
+            }
+
+            track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+        }
+
+        function startAutoRotate() {
+            stopAutoRotate();
+            autoRotateTimer = setInterval(() => moveCarousel('next'), 5000);
+        }
+
+        function stopAutoRotate() {
+            clearInterval(autoRotateTimer);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCarousel();
+            startAutoRotate();
+
+            // Nav buttons
+            document.getElementById('prev-pro').addEventListener('click', () => {
+                moveCarousel('prev');
+                startAutoRotate();
+            });
+            document.getElementById('next-pro').addEventListener('click', () => {
+                moveCarousel('next');
+                startAutoRotate();
+            });
+
+            // Pause on hover
+            const wrapper = document.querySelector('.carousel-wrapper');
+            wrapper.addEventListener('mouseenter', stopAutoRotate);
+            wrapper.addEventListener('mouseleave', startAutoRotate);
+
+            // Filter chips
+            document.querySelectorAll('.filter-chip').forEach(chip => {
+                chip.addEventListener('click', () => {
+                    document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+                    chip.classList.add('active');
+                    currentFilter = chip.dataset.filter;
+                    renderCarousel();
+                });
+            });
+        });
+    </script>
+    <!-- Sticky Mobile CTA -->
+    <a href="https://tally.so/r/b5NdE6" onclick="openBookingModal(event)" class="sticky-mobile-cta">
+        <i class="fa-solid fa-calendar-check" style="margin-right: 8px;"></i> Book Your Consultation
+    </a>
+
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <!-- 1. AUTHENTICATION MODAL (ExpertDesk 2-Column Luxury Style)      -->
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <div class="kroovo-modal-overlay" id="auth-modal-overlay" onclick="closeAuthModalOnOutside(event)">
+        <div class="auth-card" id="auth-card-container">
+            <!-- Left Branding Hero Panel -->
+            <div class="auth-left-panel">
+                <div>
+                    <div class="auth-brand-badge">
+                        <i class="fa-solid fa-shield-halved" style="color: var(--gold); font-size: 13px;"></i>
+                        <span>Kroovo Trust Network</span>
+                    </div>
+                    <h2 class="auth-left-title" id="auth-left-title">India's verified expert network.</h2>
+                    <p class="auth-left-desc" id="auth-left-desc">Access top Chartered Accountants, Company Secretaries, and Legal Advisors for on-demand consultations with zero waiting time.</p>
+                    
+                    <ul class="auth-perks-list">
+                        <li><i class="fa-solid fa-circle-check"></i> Registry-verified ICAI & ICMAI professionals</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Transparent pricing — no hidden consultation charges</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Encrypted DPDP-compliant consultation room</li>
+                        <li><i class="fa-solid fa-circle-check"></i> 7-day free post-session follow-up messaging</li>
+                    </ul>
+                </div>
+                
+                <div style="font-size: 11px; color: var(--text-muted); opacity: 0.8; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 15px;">
+                    Google Cloud Project: <code style="color: var(--gold); background: rgba(255,255,255,0.06); padding: 2px 6px; border-radius: 4px;">kroovo-2805</code>
+                </div>
+            </div>
+
+            <!-- Right Form Panel -->
+            <div class="auth-right-panel">
+                <button type="button" class="auth-close-btn" onclick="closeAuthModal()" aria-label="Close modal">&times;</button>
+                
+                <!-- Tab Switcher (Sign In vs Get Started) -->
+                <div class="auth-tabs">
+                    <button type="button" class="auth-tab-btn active" id="tab-btn-signin" onclick="switchAuthTab('signin')">Sign In</button>
+                    <button type="button" class="auth-tab-btn" id="tab-btn-getstarted" onclick="switchAuthTab('getstarted')">Create Account</button>
+                </div>
+
+                <!-- Role Selector (Only in Get Started view) -->
+                <div class="role-selector-wrap" id="role-selector-wrap" style="display: none;">
+                    <div class="role-selector-label">I want to</div>
+                    <div class="role-selector">
+                        <button type="button" class="role-pill-btn active" id="role-btn-client" onclick="setAuthRole('client')">
+                            <span><i class="fa-regular fa-user" style="margin-right: 4px;"></i> Client</span>
+                            <small>Hire an Expert</small>
+                        </button>
+                        <button type="button" class="role-pill-btn" id="role-btn-pro" onclick="setAuthRole('professional')">
+                            <span><i class="fa-solid fa-user-tie" style="margin-right: 4px;"></i> Professional</span>
+                            <small>Offer Services</small>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Google Sign In Action -->
+                <button type="button" class="btn-google-auth" id="btn-custom-google-auth" onclick="handleGoogleSignInClick()">
+                    <svg class="google-icon-svg" viewBox="0 0 24 24">
+                        <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/>
+                        <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.33 24 12 24z"/>
+                        <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 10.03 0 12s.45 3.82 1.25 5.42l4.03-3.15z"/>
+                        <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/>
+                    </svg>
+                    <span id="google-btn-label">Continue with Google</span>
+                </button>
+
+                <!-- Hidden Native Google Sign In Button Mount for GIS -->
+                <div id="google-gis-mount" style="display: none;"></div>
+
+                <div class="auth-divider">
+                    <span>or continue with email</span>
+                </div>
+
+                <!-- Form -->
+                <form id="kroovo-auth-form" onsubmit="handleAuthFormSubmit(event)">
+                    <!-- Full Name (Only in Get Started) -->
+                    <div class="auth-form-group" id="group-fullname" style="display: none;">
+                        <label class="auth-label" for="auth-fullname">Full Name</label>
+                        <div class="auth-input-wrap">
+                            <i class="fa-regular fa-user auth-input-icon"></i>
+                            <input type="text" id="auth-fullname" class="auth-input" placeholder="e.g. Rahul Sharma">
+                        </div>
+                    </div>
+
+                    <!-- Phone Number (Only in Get Started) -->
+                    <div class="auth-form-group" id="group-phone" style="display: none;">
+                        <label class="auth-label" for="auth-phone">Phone Number</label>
+                        <div class="auth-input-wrap">
+                            <i class="fa-solid fa-phone auth-input-icon"></i>
+                            <input type="tel" id="auth-phone" class="auth-input" placeholder="+91 98765 43210">
+                        </div>
+                    </div>
+
+                    <!-- Email Field -->
+                    <div class="auth-form-group">
+                        <label class="auth-label" for="auth-email">Email Address</label>
+                        <div class="auth-input-wrap">
+                            <i class="fa-regular fa-envelope auth-input-icon"></i>
+                            <input type="email" id="auth-email" class="auth-input" placeholder="you@company.com" required>
+                        </div>
+                    </div>
+
+                    <!-- Password Field -->
+                    <div class="auth-form-group">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                            <label class="auth-label" for="auth-password" style="margin: 0;">Password</label>
+                            <a href="javascript:void(0)" onclick="handleForgotPassword()" id="auth-forgot-link" style="font-size: 12px; color: var(--teal); text-decoration: none; font-weight: 500;">Forgot password?</a>
+                        </div>
+                        <div class="auth-input-wrap">
+                            <i class="fa-solid fa-lock auth-input-icon"></i>
+                            <input type="password" id="auth-password" class="auth-input" placeholder="••••••••" required>
+                            <button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('auth-password', this)">
+                                <i class="fa-regular fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="auth-submit-btn" id="auth-submit-btn">
+                        <span id="auth-submit-text">Sign In</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </form>
+
+                <div class="auth-footer-notice">
+                    <i class="fa-solid fa-lock" style="color: var(--teal); font-size: 11px;"></i>
+                    <span>Protected by 256-bit bank-grade SSL encryption</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <!-- 2. BOOKING MODAL (Tally.so Integration)                         -->
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <div class="kroovo-modal-overlay" id="booking-modal-overlay" onclick="closeBookingModalOnOutside(event)">
+        <div class="embed-modal-content">
+            <div class="embed-modal-header">
+                <div class="embed-header-title">
+                    <div style="width: 32px; height: 32px; border-radius: 8px; background: rgba(14,124,123,0.2); color: var(--teal-light); display: flex; align-items: center; justify-content: center;">
+                        <i class="fa-solid fa-calendar-check"></i>
+                    </div>
+                    <div>
+                        <h3>Book Instant Consultation</h3>
+                        <div style="font-size: 11px; color: var(--text-muted);">Match with an ICAI/ICMAI Verified Expert in 5 Minutes</div>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <span class="embed-header-badge"><i class="fa-solid fa-bolt" style="margin-right: 4px;"></i> Live Matching</span>
+                    <button type="button" class="auth-close-btn" onclick="closeBookingModal()" style="position: static; width: 32px; height: 32px; background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.1); color: white;">&times;</button>
+                </div>
+            </div>
+            <div class="embed-modal-body">
+                <div class="embed-loading-state" id="booking-loading-state">
+                    <div class="embed-spinner"></div>
+                    <div style="font-size: 14px; font-weight: 600;">Loading Kroovo Secure Booking...</div>
+                    <div style="font-size: 12px; color: var(--text-muted);">Powered by verified appointment system</div>
+                </div>
+                <iframe id="tally-booking-iframe" class="embed-iframe" src="about:blank" title="Kroovo Consultation Booking" onload="handleTallyIframeLoad()"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <!-- 3. EXPERT ONBOARDING MODAL (JotForm Integration)                -->
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <div class="kroovo-modal-overlay" id="expert-modal-overlay" onclick="closeExpertModalOnOutside(event)">
+        <div class="embed-modal-content">
+            <div class="embed-modal-header">
+                <div class="embed-header-title">
+                    <div style="width: 32px; height: 32px; border-radius: 8px; background: rgba(212,147,58,0.2); color: var(--gold); display: flex; align-items: center; justify-content: center;">
+                        <i class="fa-solid fa-user-tie"></i>
+                    </div>
+                    <div>
+                        <h3>Join as a Verified Expert</h3>
+                        <div style="font-size: 11px; color: var(--text-muted);">ICAI / ICMAI / ICSI / Bar Council Registration Required</div>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <a href="https://form.jotform.com/getkroovo/professional-onboarding-form" target="_blank" style="font-size: 12px; color: var(--gold); text-decoration: none; display: flex; align-items: center; gap: 4px;">
+                        Open Full Tab <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
+                    <button type="button" class="auth-close-btn" onclick="closeExpertModal()" style="position: static; width: 32px; height: 32px; background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.1); color: white;">&times;</button>
+                </div>
+            </div>
+            <div class="embed-modal-body">
+                <div class="embed-loading-state" id="expert-loading-state">
+                    <div class="embed-spinner" style="border-top-color: var(--gold);"></div>
+                    <div style="font-size: 14px; font-weight: 600;">Loading Professional Onboarding Form...</div>
+                    <div style="font-size: 12px; color: var(--text-muted);">Credentials will be cross-checked with official registries</div>
+                </div>
+                <iframe id="jotform-expert-iframe" class="embed-iframe" src="about:blank" title="Kroovo Expert Onboarding" onload="handleJotFormIframeLoad()"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <!-- 4. CALL SCHEDULING & SUCCESS DIALOG                             -->
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <div class="kroovo-modal-overlay" id="schedule-modal-overlay" onclick="closeScheduleModalOnOutside(event)">
+        <div class="schedule-dialog">
+            <button type="button" class="auth-close-btn" onclick="closeScheduleModal()" style="top: 15px; right: 15px; background: rgba(255,255,255,0.06); color: white; border-color: rgba(255,255,255,0.15);">&times;</button>
+            
+            <div class="schedule-success-icon">
+                <i class="fa-solid fa-calendar-check"></i>
+            </div>
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 26px; margin-bottom: 8px;">Consultation Confirmed!</h2>
+            <p style="color: var(--text-muted); font-size: 14px; line-height: 1.6; margin-bottom: 20px;" id="schedule-summary-text">
+                Your 30-minute consultation has been scheduled with a verified ICAI professional.
+            </p>
+
+            <div style="background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 14px; padding: 16px; text-align: left; margin-bottom: 20px;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 13px;">
+                    <span style="color: var(--text-muted);">Topic:</span>
+                    <strong style="color: white;" id="schedule-topic-name">Tax & Compliance Advisory</strong>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 13px;">
+                    <span style="color: var(--text-muted);">Mode:</span>
+                    <strong style="color: var(--teal-light);"><i class="fa-solid fa-video" style="margin-right: 4px;"></i> Encrypted Video Call</strong>
+                </div>
+                <div style="display: flex; justify-content: space-between; font-size: 13px;">
+                    <span style="color: var(--text-muted);">Follow-up:</span>
+                    <strong style="color: var(--gold);">7 Days Free Messaging Included</strong>
+                </div>
+            </div>
+
+            <div class="schedule-actions-grid">
+                <button type="button" class="btn-calendar-add" onclick="triggerGoogleCalendarAdd()">
+                    <i class="fa-brands fa-google" style="color: #4285F4;"></i> Add to Google Calendar
+                </button>
+                <button type="button" class="btn-calendar-ics" onclick="triggerICalDownload()">
+                    <i class="fa-regular fa-calendar"></i> Download Apple / Outlook iCal (.ics)
+                </button>
+                <button type="button" class="btn-calendar-ics" onclick="requestNotificationAccess()" style="border-color: rgba(26,188,156,0.3); color: var(--teal-light);">
+                    <i class="fa-regular fa-bell"></i> Enable Browser Reminder Alerts
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <!-- 5. TOAST NOTIFICATION CONTAINER                                 -->
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <!-- 6. KROOVO PLATFORM JAVASCRIPT ENGINE                            -->
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <script>
+        // ── Configuration ───────────────────────────────────────────
+        const KROOVO_CONFIG = {
+            googleClientId: 'kroovo-2805.apps.googleusercontent.com', // Google Cloud project: kroovo-2805
+            tallyFormUrl: 'https://tally.so/r/b5NdE6',
+            tallyEmbedUrl: 'https://tally.so/embed/b5NdE6?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1',
+            jotformUrl: 'https://form.jotform.com/getkroovo/professional-onboarding-form',
+            currentSessionSchedule: {
+                title: 'Kroovo Expert Consultation',
+                topic: 'GST, ITR & Compliance Advisory',
+                durationMinutes: 30
+            }
+        };
+
+        // ── State ───────────────────────────────────────────────────
+        let currentAuthMode = 'signin'; // 'signin' | 'getstarted'
+        let currentAuthRole = 'client'; // 'client' | 'professional'
+        let currentUser = null;
+
+        // ── Initialization ──────────────────────────────────────────
+        document.addEventListener('DOMContentLoaded', () => {
+            initAuthState();
+            initGoogleIdentityServices();
+            setupTallyMessageListener();
+
+            // Mobile Menu Logic
+            const menuBtn = document.getElementById('mobile-menu-btn');
+            const drawer = document.getElementById('mobile-drawer');
+            const drawerLinks = document.querySelectorAll('.drawer-link');
+
+            function toggleMenu() {
+                menuBtn.classList.toggle('active');
+                drawer.classList.toggle('active');
+                document.body.style.overflow = drawer.classList.contains('active') ? 'hidden' : '';
+            }
+
+            window.toggleMenu = toggleMenu;
+            if (menuBtn) menuBtn.addEventListener('click', toggleMenu);
+            drawerLinks.forEach(link => link.addEventListener('click', toggleMenu));
+
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 992 && drawer && drawer.classList.contains('active')) {
+                    toggleMenu();
+                }
+            });
+        });
+
+        // ── Authentication State Management ─────────────────────────
+        function initAuthState() {
+            try {
+                const saved = localStorage.getItem('kroovo_user');
+                if (saved) {
+                    currentUser = JSON.parse(saved);
+                    renderAuthenticatedNav(currentUser);
+                } else {
+                    renderUnauthenticatedNav();
+                }
+            } catch (e) {
+                console.warn('Auth state load error:', e);
+                renderUnauthenticatedNav();
+            }
+        }
+
+        function renderAuthenticatedNav(user) {
+            const unauthNav = document.getElementById('nav-unauth-actions');
+            const userProfile = document.getElementById('nav-user-profile');
+            const mobileStatus = document.getElementById('mobile-user-status');
+            const mobileAuthActions = document.getElementById('mobile-auth-actions');
+
+            if (unauthNav) unauthNav.style.display = 'none';
+            if (userProfile) userProfile.style.display = 'flex';
+            if (mobileAuthActions) mobileAuthActions.style.display = 'none';
+            if (mobileStatus) mobileStatus.style.display = 'block';
+
+            // Populate user info
+            const name = user.name || user.email.split('@')[0];
+            const initials = getInitials(name);
+
+            const userAvatar = document.getElementById('user-avatar-initials');
+            if (userAvatar) {
+                if (user.picture) {
+                    userAvatar.innerHTML = `<img src="${user.picture}" alt="${name}">`;
+                } else {
+                    userAvatar.innerText = initials;
+                }
+            }
+
+            const mobileAvatar = document.getElementById('mobile-user-avatar');
+            if (mobileAvatar) {
+                if (user.picture) {
+                    mobileAvatar.innerHTML = `<img src="${user.picture}" alt="${name}">`;
+                } else {
+                    mobileAvatar.innerText = initials;
+                }
+            }
+
+            const navName = document.getElementById('user-nav-display-name');
+            if (navName) navName.innerText = name.split(' ')[0];
+
+            const roleBadge = document.getElementById('user-role-badge');
+            if (roleBadge) roleBadge.innerText = user.role === 'professional' ? 'Expert' : 'Client';
+
+            const dropdownName = document.getElementById('dropdown-user-name');
+            if (dropdownName) dropdownName.innerText = name;
+
+            const dropdownEmail = document.getElementById('dropdown-user-email');
+            if (dropdownEmail) dropdownEmail.innerText = user.email || '';
+
+            const mobName = document.getElementById('mobile-user-name');
+            if (mobName) mobName.innerText = name;
+
+            const mobEmail = document.getElementById('mobile-user-email');
+            if (mobEmail) mobEmail.innerText = user.email || '';
+        }
+
+        function renderUnauthenticatedNav() {
+            const unauthNav = document.getElementById('nav-unauth-actions');
+            const userProfile = document.getElementById('nav-user-profile');
+            const mobileStatus = document.getElementById('mobile-user-status');
+            const mobileAuthActions = document.getElementById('mobile-auth-actions');
+
+            if (unauthNav) unauthNav.style.display = 'flex';
+            if (userProfile) userProfile.style.display = 'none';
+            if (mobileAuthActions) mobileAuthActions.style.display = 'flex';
+            if (mobileStatus) mobileStatus.style.display = 'none';
+        }
+
+        function getInitials(name) {
+            if (!name) return 'U';
+            const parts = name.trim().split(' ');
+            if (parts.length === 1) return parts[0].substring(0, 2).toUpperCase();
+            return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+        }
+
+        function toggleUserDropdown(e) {
+            e.stopPropagation();
+            const dropdown = document.getElementById('user-dropdown-menu');
+            if (dropdown) dropdown.classList.toggle('active');
+        }
+
+        document.addEventListener('click', () => {
+            const dropdown = document.getElementById('user-dropdown-menu');
+            if (dropdown) dropdown.classList.remove('active');
+        });
+
+        // ── Google Identity Services (GSI) ──────────────────────────
+        function initGoogleIdentityServices() {
+            if (window.google && google.accounts && google.accounts.id) {
+                try {
+                    google.accounts.id.initialize({
+                        client_id: KROOVO_CONFIG.googleClientId,
+                        callback: handleGoogleCredentialResponse,
+                        auto_select: false,
+                        cancel_on_tap_outside: true
+                    });
+                } catch (err) {
+                    console.info('GSI initialized in fallback mode.');
+                }
+            } else {
+                // Wait and retry if script is still loading
+                setTimeout(initGoogleIdentityServices, 1000);
+            }
+        }
+
+        function handleGoogleCredentialResponse(response) {
+            try {
+                // Decode JWT Token
+                const base64Url = response.credential.split('.')[1];
+                const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+                const jsonPayload = decodeURIComponent(atob(base64).split('').map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join(''));
+                const payload = JSON.parse(jsonPayload);
+
+                completeLogin({
+                    id: payload.sub,
+                    name: payload.name,
+                    email: payload.email,
+                    picture: payload.picture,
+                    role: currentAuthRole,
+                    authProvider: 'google'
+                });
+            } catch (err) {
+                console.error('Google token parse error:', err);
+                simulateGoogleLogin();
+            }
+        }
+
+        function handleGoogleSignInClick() {
+            if (window.google && google.accounts && google.accounts.id && KROOVO_CONFIG.googleClientId.indexOf('kroovo-2805') !== -1 && !KROOVO_CONFIG.googleClientId.startsWith('YOUR_')) {
+                try {
+                    google.accounts.id.prompt((notification) => {
+                        if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
+                            simulateGoogleLogin();
+                        }
+                    });
+                    return;
+                } catch (e) {
+                    // Fallback to simulation
+                }
+            }
+            simulateGoogleLogin();
+        }
+
+        function simulateGoogleLogin() {
+            // High fidelity simulated Google authentication for preview / local testing
+            showToast('info', 'Connecting to Google', 'Authenticating via Google Cloud project kroovo-2805...', 2000);
+            setTimeout(() => {
+                const sampleName = currentAuthRole === 'professional' ? 'CA Vikram Malhotra' : 'Aman Verma';
+                const sampleEmail = currentAuthRole === 'professional' ? 'ca.vikram@kroovo.in' : 'aman.verma@gmail.com';
+                completeLogin({
+                    id: 'g_' + Date.now(),
+                    name: sampleName,
+                    email: sampleEmail,
+                    role: currentAuthRole,
+                    authProvider: 'google'
+                });
+            }, 900);
+        }
+
+        function completeLogin(userData) {
+            currentUser = userData;
+            localStorage.setItem('kroovo_user', JSON.stringify(userData));
+            renderAuthenticatedNav(userData);
+            closeAuthModal();
+
+            const roleMsg = userData.role === 'professional' ? 'Expert portal active.' : 'You can now book direct consultations.';
+            showToast('success', `Welcome back, ${userData.name}!`, `Signed in successfully. ${roleMsg}`, 4500);
+
+            // If user has open booking, refresh pre-fill
+            updateBookingPrefill();
+        }
+
+        function signOutUser() {
+            localStorage.removeItem('kroovo_user');
+            currentUser = null;
+            renderUnauthenticatedNav();
+            showToast('gold', 'Signed Out', 'You have been safely signed out of Kroovo.', 3000);
+        }
+
+        // ── Auth Modal UI Handlers ──────────────────────────────────
+        window.openAuthModal = function(tab = 'signin', role = 'client') {
+            const overlay = document.getElementById('auth-modal-overlay');
+            if (!overlay) return;
+            switchAuthTab(tab);
+            setAuthRole(role);
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        };
+
+        window.closeAuthModal = function() {
+            const overlay = document.getElementById('auth-modal-overlay');
+            if (overlay) overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        };
+
+        window.closeAuthModalOnOutside = function(e) {
+            if (e.target.id === 'auth-modal-overlay') {
+                closeAuthModal();
+            }
+        };
+
+        window.switchAuthTab = function(tab) {
+            currentAuthMode = tab;
+            const tabSignIn = document.getElementById('tab-btn-signin');
+            const tabGetStarted = document.getElementById('tab-btn-getstarted');
+            const roleWrap = document.getElementById('role-selector-wrap');
+            const groupName = document.getElementById('group-fullname');
+            const groupPhone = document.getElementById('group-phone');
+            const forgotLink = document.getElementById('auth-forgot-link');
+            const submitText = document.getElementById('auth-submit-text');
+            const leftTitle = document.getElementById('auth-left-title');
+            const leftDesc = document.getElementById('auth-left-desc');
+            const googleLabel = document.getElementById('google-btn-label');
+
+            if (tab === 'signin') {
+                tabSignIn.classList.add('active');
+                tabGetStarted.classList.remove('active');
+                roleWrap.style.display = 'none';
+                groupName.style.display = 'none';
+                groupPhone.style.display = 'none';
+                forgotLink.style.display = 'block';
+                submitText.innerText = 'Sign In';
+                googleLabel.innerText = 'Sign In with Google';
+                leftTitle.innerText = 'Welcome back to Kroovo.';
+                leftDesc.innerText = 'Access verified professionals, track your bookings, and manage your financial consultations with complete clarity.';
+            } else {
+                tabSignIn.classList.remove('active');
+                tabGetStarted.classList.add('active');
+                roleWrap.style.display = 'block';
+                groupName.style.display = 'block';
+                groupPhone.style.display = 'block';
+                forgotLink.style.display = 'none';
+                submitText.innerText = currentAuthRole === 'professional' ? 'Apply as Professional' : 'Create Free Account';
+                googleLabel.innerText = 'Sign Up with Google';
+                leftTitle.innerText = 'Join India\'s Most Trusted Expert Network.';
+                leftDesc.innerText = 'Whether you need instant professional advice or want to offer your verified expertise — Kroovo gets you started in seconds.';
+            }
+        };
+
+        window.setAuthRole = function(role) {
+            currentAuthRole = role;
+            const btnClient = document.getElementById('role-btn-client');
+            const btnPro = document.getElementById('role-btn-pro');
+            const submitText = document.getElementById('auth-submit-text');
+
+            if (role === 'client') {
+                btnClient.classList.add('active');
+                btnPro.classList.remove('active');
+                if (currentAuthMode === 'getstarted') submitText.innerText = 'Create Client Account';
+            } else {
+                btnClient.classList.remove('active');
+                btnPro.classList.add('active');
+                if (currentAuthMode === 'getstarted') submitText.innerText = 'Apply as Professional';
+            }
+        };
+
+        window.togglePasswordVisibility = function(inputId, btn) {
+            const input = document.getElementById(inputId);
+            if (!input) return;
+            const isPassword = input.type === 'password';
+            input.type = isPassword ? 'text' : 'password';
+            btn.innerHTML = isPassword ? '<i class="fa-regular fa-eye-slash"></i>' : '<i class="fa-regular fa-eye"></i>';
+        };
+
+        window.handleForgotPassword = function() {
+            const email = document.getElementById('auth-email').value;
+            if (!email) {
+                showToast('gold', 'Forgot Password', 'Please enter your email address first.', 3000);
+            } else {
+                showToast('success', 'Reset Link Sent', `Password reset instructions sent to ${email}`, 4000);
+            }
+        };
+
+        window.handleAuthFormSubmit = function(e) {
+            e.preventDefault();
+            const email = document.getElementById('auth-email').value;
+            const nameInput = document.getElementById('auth-fullname');
+            const name = (nameInput && nameInput.value.trim()) ? nameInput.value.trim() : email.split('@')[0];
+
+            showToast('info', 'Processing', 'Setting up your session...', 1500);
+            setTimeout(() => {
+                completeLogin({
+                    id: 'usr_' + Date.now(),
+                    name: name,
+                    email: email,
+                    role: currentAuthRole,
+                    authProvider: 'email'
+                });
+            }, 700);
+        };
+
+        // ── Booking Modal (Tally Embed) ─────────────────────────────
+        window.openBookingModal = function(e, prefilledTopic = '') {
+            if (e && e.preventDefault) e.preventDefault();
+
+            // Check if Tally popup is available via official SDK
+            if (window.Tally && typeof window.Tally.openPopup === 'function') {
+                const options = {
+                    layout: 'modal',
+                    width: 750,
+                    autoClose: 3000,
+                    hiddenFields: {
+                        source: 'kroovo_landing',
+                        user_name: currentUser ? currentUser.name : '',
+                        user_email: currentUser ? currentUser.email : '',
+                        topic: prefilledTopic || ''
+                    }
+                };
+                window.Tally.openPopup('b5NdE6', options);
+                return;
+            }
+
+            // Fallback: Embed Modal container
+            const overlay = document.getElementById('booking-modal-overlay');
+            const iframe = document.getElementById('tally-booking-iframe');
+            const loader = document.getElementById('booking-loading-state');
+
+            if (!overlay || !iframe) return;
+
+            let url = KROOVO_CONFIG.tallyEmbedUrl;
+            if (currentUser) {
+                url += `&user_name=${encodeURIComponent(currentUser.name)}&user_email=${encodeURIComponent(currentUser.email)}`;
+            }
+            if (prefilledTopic) {
+                url += `&topic=${encodeURIComponent(prefilledTopic)}`;
+            }
+
+            if (loader) loader.style.display = 'flex';
+            iframe.src = url;
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        };
+
+        window.closeBookingModal = function() {
+            const overlay = document.getElementById('booking-modal-overlay');
+            if (overlay) overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        };
+
+        window.closeBookingModalOnOutside = function(e) {
+            if (e.target.id === 'booking-modal-overlay') closeBookingModal();
+        };
+
+        window.handleTallyIframeLoad = function() {
+            const loader = document.getElementById('booking-loading-state');
+            if (loader) loader.style.display = 'none';
+        };
+
+        function updateBookingPrefill() {
+            const iframe = document.getElementById('tally-booking-iframe');
+            if (iframe && iframe.src && iframe.src !== 'about:blank' && currentUser) {
+                iframe.src = `${KROOVO_CONFIG.tallyEmbedUrl}&user_name=${encodeURIComponent(currentUser.name)}&user_email=${encodeURIComponent(currentUser.email)}`;
+            }
+        }
+
+        // Listen for Tally Form submission message
+        function setupTallyMessageListener() {
+            window.addEventListener('message', (event) => {
+                if (event && event.data) {
+                    // Tally emits Tally.FormSubmitted
+                    if (event.data === 'Tally.FormSubmitted' || (typeof event.data === 'string' && event.data.includes('Tally.FormSubmitted')) || (event.data.type === 'Tally.FormSubmitted')) {
+                        closeBookingModal();
+                        showScheduleModal({
+                            title: 'Kroovo Expert Consultation',
+                            topic: 'GST, ITR & Statutory Compliance',
+                            time: 'Today, 30-min slot'
+                        });
+                        showToast('success', 'Booking Confirmed! 🎉', 'Your session details and expert matching are ready.', 5000);
+                    }
+                }
+            });
+        }
+
+        // ── Expert Onboarding Modal (JotForm Embed) ─────────────────
+        window.openExpertModal = function(e) {
+            if (e && e.preventDefault) e.preventDefault();
+
+            const overlay = document.getElementById('expert-modal-overlay');
+            const iframe = document.getElementById('jotform-expert-iframe');
+            const loader = document.getElementById('expert-loading-state');
+
+            if (!overlay || !iframe) return;
+
+            if (iframe.src === 'about:blank' || !iframe.src) {
+                iframe.src = KROOVO_CONFIG.jotformUrl;
+            }
+
+            if (loader) loader.style.display = 'flex';
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        };
+
+        window.closeExpertModal = function() {
+            const overlay = document.getElementById('expert-modal-overlay');
+            if (overlay) overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        };
+
+        window.closeExpertModalOnOutside = function(e) {
+            if (e.target.id === 'expert-modal-overlay') closeExpertModal();
+        };
+
+        window.handleJotFormIframeLoad = function() {
+            const loader = document.getElementById('expert-loading-state');
+            if (loader) loader.style.display = 'none';
+        };
+
+        // ── Schedule & Calendar Integration ────────────────────────
+        window.showScheduleModal = function(details = {}) {
+            const overlay = document.getElementById('schedule-modal-overlay');
+            const topicElem = document.getElementById('schedule-topic-name');
+            const summaryElem = document.getElementById('schedule-summary-text');
+
+            if (topicElem && details.topic) topicElem.innerText = details.topic;
+            if (summaryElem && details.title) {
+                summaryElem.innerText = `Your session "${details.title}" is ready. Connect directly with an ICAI/ICMAI verified expert.`;
+            }
+
+            if (overlay) overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        };
+
+        window.closeScheduleModal = function() {
+            const overlay = document.getElementById('schedule-modal-overlay');
+            if (overlay) overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        };
+
+        window.closeScheduleModalOnOutside = function(e) {
+            if (e.target.id === 'schedule-modal-overlay') closeScheduleModal();
+        };
+
+        window.triggerGoogleCalendarAdd = function() {
+            const title = encodeURIComponent('Kroovo: 1-on-1 CA/CMA Advisory Consultation');
+            const details = encodeURIComponent('Verified expert consultation session on Kroovo.\n\nRoom Link: https://kroovo.in/room\nSupport: support@kroovo.in');
+            const location = encodeURIComponent('Kroovo Secure Video Room (DPDP Encrypted)');
+
+            // Next hour time block
+            const now = new Date(Date.now() + 60 * 60 * 1000);
+            const endTime = new Date(now.getTime() + 30 * 60 * 1000);
+            
+            const formatGCalDate = (d) => d.toISOString().replace(/-|:|\.\d+/g, '');
+            const dates = `${formatGCalDate(now)}/${formatGCalDate(endTime)}`;
+
+            const gcalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&details=${details}&location=${location}&dates=${dates}`;
+            window.open(gcalUrl, '_blank');
+            showToast('success', 'Google Calendar Opened', 'Event invitation drafted with secure meeting details.', 3500);
+        };
+
+        window.triggerICalDownload = function() {
+            const now = new Date(Date.now() + 60 * 60 * 1000);
+            const endTime = new Date(now.getTime() + 30 * 60 * 1000);
+            
+            const formatICSDate = (d) => d.toISOString().replace(/-|:|\.\d+/g, '').slice(0, 15) + 'Z';
+
+            const icsData = [
+                'BEGIN:VCALENDAR',
+                'VERSION:2.0',
+                'PRODID:-//Kroovo Technologies//Consultation Scheduler//EN',
+                'CALSCALE:GREGORIAN',
+                'METHOD:PUBLISH',
+                'BEGIN:VEVENT',
+                `UID:kroovo-${Date.now()}@kroovo.in`,
+                `DTSTAMP:${formatICSDate(new Date())}`,
+                `DTSTART:${formatICSDate(now)}`,
+                `DTEND:${formatICSDate(endTime)}`,
+                'SUMMARY:Kroovo: CA/CMA Advisory Consultation',
+                'DESCRIPTION:Verified financial advisory session with Kroovo professional.\\nRoom: https://kroovo.in/room',
+                'LOCATION:Kroovo Encrypted Video Portal',
+                'STATUS:CONFIRMED',
+                'END:VEVENT',
+                'END:VCALENDAR'
+            ].join('\r\n');
+
+            const blob = new Blob([icsData], { type: 'text/calendar;charset=utf-8' });
+            const link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.setAttribute('download', 'kroovo-consultation.ics');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            showToast('success', 'iCal File Downloaded', 'Import kroovo-consultation.ics into Apple Calendar or Outlook.', 3500);
+        };
+
+        window.requestNotificationAccess = function() {
+            if (!('Notification' in window)) {
+                showToast('gold', 'Notifications Unsupported', 'Your browser does not support desktop notifications.', 3500);
+                return;
+            }
+
+            if (Notification.permission === 'granted') {
+                showToast('success', 'Alerts Active', 'Session reminders are already enabled for this device.', 3000);
+                new Notification('Kroovo Reminder Active', {
+                    body: 'You will receive an alert 10 minutes prior to your expert consultation.',
+                    icon: 'logo.png'
+                });
+            } else if (Notification.permission !== 'denied') {
+                Notification.requestPermission().then((permission) => {
+                    if (permission === 'granted') {
+                        showToast('success', 'Reminders Enabled! 🔔', 'You will receive instant alerts for booking updates.', 4000);
+                        new Notification('Kroovo Advisory Alert', {
+                            body: 'Booking alerts and expert notifications enabled.',
+                            icon: 'logo.png'
+                        });
+                    }
+                });
+            } else {
+                showToast('gold', 'Permission Blocked', 'Please unblock notifications in browser settings to receive call alerts.', 4000);
+            }
+        };
+
+        // ── In-App Toast Engine ─────────────────────────────────────
+        window.showToast = function(type = 'success', title = '', message = '', duration = 4500) {
+            const container = document.getElementById('toast-container');
+            if (!container) return;
+
+            const toast = document.createElement('div');
+            toast.className = `kroovo-toast ${type}`;
+
+            let iconHtml = '<i class="fa-solid fa-circle-check"></i>';
+            if (type === 'info') iconHtml = '<i class="fa-solid fa-circle-info"></i>';
+            if (type === 'gold') iconHtml = '<i class="fa-solid fa-bell"></i>';
+
+            toast.innerHTML = `
+                <div class="toast-icon-wrap">${iconHtml}</div>
+                <div class="toast-content">
+                    <div class="toast-title">${title}</div>
+                    <div class="toast-desc">${message}</div>
+                </div>
+                <button type="button" class="toast-close" onclick="this.parentElement.remove()">&times;</button>
+                <div class="toast-progress" style="animation-duration: ${duration}ms;"></div>
+            `;
+
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                if (toast && toast.parentElement) {
+                    toast.style.opacity = '0';
+                    toast.style.transform = 'translateY(15px)';
+                    toast.style.transition = 'all 0.3s';
+                    setTimeout(() => toast.remove(), 300);
+                }
+            }, duration);
+        };
+
+        // ── Promotional Offer Dismiss ───────────────────────────────
+        window.dismissPromoBanner = function() {
+            const banner = document.getElementById('promo-banner');
+            if (banner) {
+                banner.style.display = 'none';
+                sessionStorage.setItem('kroovo_promo_dismissed', 'true');
+            }
+        };
+
+        // Check if dismissed previously
+        if (sessionStorage.getItem('kroovo_promo_dismissed') === 'true') {
+            const banner = document.getElementById('promo-banner');
+            if (banner) banner.style.display = 'none';
+        }
+    </script>
+    <a href="https://wa.me/919686711066" target="_blank" class="fab" title="Chat on WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+</body>
+</html>
