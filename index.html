@@ -342,7 +342,9 @@
         .role-pill-btn.active { background: #ffffff; color: #020817; box-shadow: 0 2px 8px rgba(0,0,0,0.06); font-weight: 700; }
 
         .btn-google-auth { width: 100%; background: #ffffff; border: 1.5px solid #e2e8f0; padding: 12px 18px; border-radius: 12px; font-size: 14px; font-weight: 600; color: #1e293b; display: flex; align-items: center; justify-content: center; gap: 12px; cursor: pointer; transition: 0.25s; box-shadow: 0 2px 6px rgba(0,0,0,0.03); margin-bottom: 20px; }
-        .btn-google-auth:hover { border-color: #94a3b8; background: #f8fafc; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+        .btn-google-auth:hover:not(:disabled) { border-color: #94a3b8; background: #f8fafc; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+        .btn-google-auth:disabled { cursor: not-allowed; opacity: 0.7; }
+        .auth-btn-spinner { width: 16px; height: 16px; border: 2px solid rgba(0,0,0,0.15); border-top-color: currentColor; border-radius: 50%; animation: spin 0.6s linear infinite; display: inline-block; vertical-align: middle; }
         .google-icon-svg { width: 18px; height: 18px; }
 
         .auth-divider { display: flex; align-items: center; text-align: center; margin: 15px 0 20px; color: #94a3b8; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
@@ -1168,8 +1170,8 @@
                         <i class="fa-solid fa-shield-halved" style="color: var(--gold); font-size: 13px;"></i>
                         <span>Kroovo Trust Network</span>
                     </div>
-                    <h2 class="auth-left-title" id="auth-left-title">India's verified expert network.</h2>
-                    <p class="auth-left-desc" id="auth-left-desc">Access top Chartered Accountants, Company Secretaries, and Legal Advisors for on-demand consultations with zero waiting time.</p>
+                    <h2 class="auth-left-title" id="auth-left-title">Welcome back to India's trusted expert network</h2>
+                    <p class="auth-left-desc" id="auth-left-desc">Access verified professionals, track your consultations, and manage your bookings seamlessly.</p>
                     
                     <ul class="auth-perks-list">
                         <li><i class="fa-solid fa-circle-check"></i> Registry-verified ICAI & ICMAI professionals</li>
@@ -1179,8 +1181,8 @@
                     </ul>
                 </div>
                 
-                <div style="font-size: 11px; color: var(--text-muted); opacity: 0.8; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 15px;">
-                    Google Cloud Project: <code style="color: var(--gold); background: rgba(255,255,255,0.06); padding: 2px 6px; border-radius: 4px;">kroovo-2805</code>
+                <div style="font-size: 12px; color: var(--text-muted); opacity: 0.85; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 15px; display: flex; align-items: center; gap: 8px;">
+                    <i class="fa-solid fa-lock" style="color: var(--teal-light);"></i> 256-bit encrypted data protection
                 </div>
             </div>
 
@@ -1188,15 +1190,13 @@
             <div class="auth-right-panel">
                 <button type="button" class="auth-close-btn" onclick="closeAuthModal()" aria-label="Close modal">&times;</button>
                 
-                <!-- Tab Switcher (Sign In vs Get Started) -->
-                <div class="auth-tabs">
-                    <button type="button" class="auth-tab-btn active" id="tab-btn-signin" onclick="switchAuthTab('signin')">Sign In</button>
-                    <button type="button" class="auth-tab-btn" id="tab-btn-getstarted" onclick="switchAuthTab('getstarted')">Create Account</button>
+                <div style="margin-bottom: 20px;">
+                    <h2 style="font-family: 'Playfair Display', serif; font-size: 28px; color: #020817; margin-bottom: 6px;" id="auth-main-heading">Sign In</h2>
+                    <p style="font-size: 14px; color: #64748b;" id="auth-sub-heading">Don't have an account? <a href="javascript:void(0)" onclick="switchAuthTab('getstarted')" style="color: var(--teal); font-weight: 600; text-decoration: none;">Create one</a></p>
                 </div>
 
                 <!-- Role Selector -->
                 <div class="role-selector-wrap" id="role-selector-wrap">
-                    <div class="role-selector-label" id="role-selector-label">I am signing in as</div>
                     <div class="role-selector">
                         <button type="button" class="role-pill-btn active" id="role-btn-client" onclick="setAuthRole('client')">
                             <span><i class="fa-regular fa-user" style="margin-right: 4px;"></i> Client</span>
@@ -1212,9 +1212,9 @@
                 <!-- Google Sign In Action -->
                 <button type="button" class="btn-google-auth" id="btn-custom-google-auth" onclick="handleGoogleSignInClick()">
                     <svg class="google-icon-svg" viewBox="0 0 24 24">
-                        <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/>
-                        <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.33 24 12 24z"/>
-                        <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 10.03 0 12s.45 3.82 1.25 5.42l4.03-3.15z"/>
+                        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/>
+                        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                        <path fill="#FBBC05" d="M5.28 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
                         <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/>
                     </svg>
                     <span id="google-btn-label">Continue with Google</span>
@@ -1237,7 +1237,7 @@
 
                     <!-- Professional Registry Number (Only when Professional role in Get Started) -->
                     <div class="auth-form-group" id="group-membership" style="display: none;">
-                        <label class="auth-label" for="auth-membership">ICAI / ICMAI / Bar Registration No. (Optional)</label>
+                        <label class="auth-label" for="auth-membership">ICAI / ICMAI / Bar Registration No.</label>
                         <div class="auth-input-wrap">
                             <i class="fa-solid fa-id-card auth-input-icon"></i>
                             <input type="text" id="auth-membership" class="auth-input" placeholder="e.g. M.No 4021XX">
@@ -1286,7 +1286,7 @@
 
                 <div class="auth-footer-notice">
                     <i class="fa-solid fa-lock" style="color: var(--teal); font-size: 11px;"></i>
-                    <span>Connected to Google Cloud <code>kroovo-2805</code> backend</span>
+                    <span>Protected by end-to-end encryption</span>
                 </div>
             </div>
         </div>
@@ -1717,10 +1717,29 @@
             completeLogin(userData);
         }
 
+        var isAuthInProgress = false;
+
         function handleGoogleSignInClick() {
-            // Check if running on local file:/// protocol
+            if (isAuthInProgress) return;
+            isAuthInProgress = true;
+
+            var googleBtn = document.getElementById('btn-custom-google-auth');
+            var originalBtnHtml = googleBtn ? googleBtn.innerHTML : '';
+            if (googleBtn) {
+                googleBtn.disabled = true;
+                googleBtn.innerHTML = '<span class="auth-btn-spinner" style="margin-right: 8px;"></span> Connecting to Google...';
+            }
+
+            var resetBtn = function() {
+                isAuthInProgress = false;
+                if (googleBtn) {
+                    googleBtn.disabled = false;
+                    googleBtn.innerHTML = originalBtnHtml;
+                }
+            };
+
+            // Local file protocol handling
             if (window.location.protocol === 'file:') {
-                showToast('info', 'Local Preview Mode', 'Running from local file. Authenticating test account (Live OAuth requires HTTP/HTTPS).', 3500);
                 setTimeout(function() {
                     completeLogin({
                         id: 'google_user_' + Date.now().toString(36),
@@ -1730,16 +1749,16 @@
                         role: currentAuthRole,
                         authProvider: 'google.com (local preview)'
                     });
+                    resetBtn();
                 }, 400);
                 return;
             }
-
-            showToast('info', 'Connecting Google Account', 'Opening secure Google Authentication for kroovo-2805...', 2500);
 
             if (window.firebase && firebase.auth) {
                 var provider = new firebase.auth.GoogleAuthProvider();
                 provider.setCustomParameters({ prompt: 'select_account' });
                 firebase.auth().signInWithPopup(provider).then(function(result) {
+                    resetBtn();
                     if (result && result.user) {
                         var user = result.user;
                         completeLogin({
@@ -1752,8 +1771,12 @@
                         });
                     }
                 }).catch(function(fbErr) {
+                    resetBtn();
                     console.error('Google Sign-In Error:', fbErr);
-                    if (fbErr.code === 'auth/operation-not-supported-in-this-environment') {
+                    if (fbErr.code === 'auth/popup-closed-by-user' || fbErr.code === 'auth/cancelled-popup-request') {
+                        // User dismissed popup or cancelled request, do not display noisy error
+                        return;
+                    } else if (fbErr.code === 'auth/operation-not-supported-in-this-environment') {
                         completeLogin({
                             id: 'google_user_' + Date.now().toString(36),
                             name: 'Verified Google User',
@@ -1762,21 +1785,25 @@
                             authProvider: 'google.com'
                         });
                     } else {
-                        showToast('gold', 'Authentication Notice', fbErr.message || 'Google Sign-In was cancelled or encountered an issue.', 4000);
+                        showToast('gold', 'Sign-In Failed', 'Google sign-in could not be completed. Please try again.', 4000);
                     }
                 });
             } else {
-                showToast('gold', 'Backend Connecting', 'Firebase Auth service is loading. Please try again.', 3000);
+                resetBtn();
+                showToast('gold', 'Not Ready', 'Sign-in service is still loading. Please try again in a moment.', 3000);
             }
         }
 
         function handleAuthFormSubmit(e) {
             e.preventDefault();
+            if (isAuthInProgress) return;
+
             var email = document.getElementById('auth-email').value.trim().toLowerCase();
             var password = document.getElementById('auth-password').value;
             var nameInput = document.getElementById('auth-fullname');
             var membershipInput = document.getElementById('auth-membership');
             var phoneInput = document.getElementById('auth-phone');
+            var submitBtn = document.getElementById('auth-submit-btn');
 
             var name = (nameInput && nameInput.value.trim()) ? nameInput.value.trim() : email.split('@')[0].replace(/[._-]/g, ' ').replace(/\b\w/g, function(l) { return l.toUpperCase(); });
 
@@ -1785,21 +1812,37 @@
                 return;
             }
 
-            // Local file protocol handling
-            if (window.location.protocol === 'file:') {
-                completeLogin({
-                    id: 'usr_' + btoa(email).replace(/=/g, ''),
-                    name: name,
-                    email: email,
-                    role: currentAuthRole,
-                    phone: phoneInput ? phoneInput.value.trim() : '',
-                    membershipNo: membershipInput ? membershipInput.value.trim() : '',
-                    authProvider: 'email (local preview)'
-                });
-                return;
+            isAuthInProgress = true;
+            var originalSubmitHtml = submitBtn ? submitBtn.innerHTML : '';
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<span class="auth-btn-spinner" style="margin-right: 8px;"></span> Processing...';
             }
 
-            showToast('info', currentAuthMode === 'signin' ? 'Signing In' : 'Creating Account', 'Connecting to Google Cloud backend...', 2000);
+            var resetSubmitBtn = function() {
+                isAuthInProgress = false;
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalSubmitHtml;
+                }
+            };
+
+            // Local file protocol handling
+            if (window.location.protocol === 'file:') {
+                setTimeout(function() {
+                    completeLogin({
+                        id: 'usr_' + btoa(email).replace(/=/g, ''),
+                        name: name,
+                        email: email,
+                        role: currentAuthRole,
+                        phone: phoneInput ? phoneInput.value.trim() : '',
+                        membershipNo: membershipInput ? membershipInput.value.trim() : '',
+                        authProvider: 'email (local preview)'
+                    });
+                    resetSubmitBtn();
+                }, 300);
+                return;
+            }
 
             if (window.firebase && firebase.auth) {
                 var authPromise;
@@ -1817,6 +1860,7 @@
                 }
 
                 authPromise.then(function(userCredential) {
+                    resetSubmitBtn();
                     if (userCredential && userCredential.user) {
                         var user = userCredential.user;
                         completeLogin({
@@ -1830,6 +1874,7 @@
                         });
                     }
                 }).catch(function(authErr) {
+                    resetSubmitBtn();
                     console.error('Auth Form Error:', authErr);
                     if (authErr.code === 'auth/operation-not-supported-in-this-environment') {
                         completeLogin({
@@ -1849,6 +1894,7 @@
             }
 
             // Fallback if offline
+            resetSubmitBtn();
             completeLogin({
                 id: 'usr_' + btoa(email).replace(/=/g, ''),
                 name: name,
@@ -1870,7 +1916,7 @@
             syncUserToFirestore(userData);
 
             var roleMsg = userData.role === 'professional' ? 'Expert portal active.' : 'You can now book verified consultations.';
-            showToast('success', 'Welcome, ' + userData.name + '!', 'Signed in as ' + (userData.role === 'professional' ? 'Verified Expert' : 'Client') + '. ' + roleMsg, 4000);
+            showToast('success', 'Welcome, ' + userData.name.split(' ')[0] + '!', roleMsg, 4000);
 
             updateBookingPrefill();
 
@@ -1997,42 +2043,33 @@
 
         window.switchAuthTab = function(tab) {
             currentAuthMode = tab;
-            var tabSignIn = document.getElementById('tab-btn-signin');
-            var tabGetStarted = document.getElementById('tab-btn-getstarted');
+            var heading = document.getElementById('auth-main-heading');
+            var subheading = document.getElementById('auth-sub-heading');
             var groupName = document.getElementById('group-fullname');
             var groupMembership = document.getElementById('group-membership');
             var groupPhone = document.getElementById('group-phone');
             var forgotLink = document.getElementById('auth-forgot-link');
             var submitText = document.getElementById('auth-submit-text');
-            var leftTitle = document.getElementById('auth-left-title');
-            var leftDesc = document.getElementById('auth-left-desc');
             var googleLabel = document.getElementById('google-btn-label');
-            var roleLabel = document.getElementById('role-selector-label');
 
             if (tab === 'signin') {
-                if (tabSignIn) tabSignIn.classList.add('active');
-                if (tabGetStarted) tabGetStarted.classList.remove('active');
-                if (roleLabel) roleLabel.innerText = 'I am signing in as';
+                if (heading) heading.innerText = 'Sign In';
+                if (subheading) subheading.innerHTML = 'Don\'t have an account? <a href="javascript:void(0)" onclick="switchAuthTab(\'getstarted\')" style="color: var(--teal); font-weight: 600; text-decoration: none;">Create one</a>';
                 if (groupName) groupName.style.display = 'none';
                 if (groupMembership) groupMembership.style.display = 'none';
                 if (groupPhone) groupPhone.style.display = 'none';
                 if (forgotLink) forgotLink.style.display = 'block';
-                if (submitText) submitText.innerText = currentAuthRole === 'professional' ? 'Sign In as Expert' : 'Sign In as Client';
-                if (googleLabel) googleLabel.innerText = 'Sign In with Google';
-                if (leftTitle) leftTitle.innerText = 'Welcome back to Kroovo.';
-                if (leftDesc) leftDesc.innerText = 'Access verified professionals, track your bookings, and manage your financial consultations with complete clarity.';
+                if (submitText) submitText.innerText = currentAuthRole === 'professional' ? 'Sign In as Expert' : 'Sign In';
+                if (googleLabel) googleLabel.innerText = 'Continue with Google';
             } else {
-                if (tabSignIn) tabSignIn.classList.remove('active');
-                if (tabGetStarted) tabGetStarted.classList.add('active');
-                if (roleLabel) roleLabel.innerText = 'I want to register as';
+                if (heading) heading.innerText = 'Create an Account';
+                if (subheading) subheading.innerHTML = 'Already have an account? <a href="javascript:void(0)" onclick="switchAuthTab(\'signin\')" style="color: var(--teal); font-weight: 600; text-decoration: none;">Sign In</a>';
                 if (groupName) groupName.style.display = 'block';
                 if (groupMembership) groupMembership.style.display = currentAuthRole === 'professional' ? 'block' : 'none';
                 if (groupPhone) groupPhone.style.display = 'block';
                 if (forgotLink) forgotLink.style.display = 'none';
-                if (submitText) submitText.innerText = currentAuthRole === 'professional' ? 'Apply as Professional' : 'Create Client Account';
-                if (googleLabel) googleLabel.innerText = 'Sign Up with Google';
-                if (leftTitle) leftTitle.innerText = "Join India's Most Trusted Expert Network.";
-                if (leftDesc) leftDesc.innerText = 'Whether you need instant professional advice or want to offer your verified expertise — Kroovo gets you started in seconds.';
+                if (submitText) submitText.innerText = currentAuthRole === 'professional' ? 'Apply as Professional' : 'Create Account';
+                if (googleLabel) googleLabel.innerText = 'Continue with Google';
             }
         };
 
@@ -2047,7 +2084,7 @@
                 if (btnClient) btnClient.classList.add('active');
                 if (btnPro) btnPro.classList.remove('active');
                 if (groupMembership) groupMembership.style.display = 'none';
-                if (submitText) submitText.innerText = currentAuthMode === 'signin' ? 'Sign In as Client' : 'Create Client Account';
+                if (submitText) submitText.innerText = currentAuthMode === 'signin' ? 'Sign In' : 'Create Account';
             } else {
                 if (btnClient) btnClient.classList.remove('active');
                 if (btnPro) btnPro.classList.add('active');
@@ -2342,7 +2379,7 @@
                             topic: 'GST, ITR & Statutory Compliance',
                             time: 'Today, 30-min slot'
                         });
-                        showToast('success', 'Booking Confirmed! 🎉', 'Your session details and expert matching are saved to Google Cloud backend.', 5000);
+                        showToast('success', 'Booking Confirmed! 🎉', 'Your session details have been saved. Our team will match you with a verified expert shortly.', 5000);
                     }
                 }
             });
@@ -2416,7 +2453,7 @@
 
         window.triggerGoogleCalendarAdd = function() {
             var title = encodeURIComponent('Kroovo: 1-on-1 CA/CMA Advisory Consultation');
-            var details = encodeURIComponent('Verified expert consultation session on Kroovo.\n\nRoom Link: https://kroovo.in/room\nGoogle Cloud Project: kroovo-2805\nSupport: support@kroovo.in');
+            var details = encodeURIComponent('Verified expert consultation session on Kroovo.\n\nRoom Link: https://kroovo.in/room\nSupport: support@kroovo.in');
             var location = encodeURIComponent('Kroovo Secure Video Room (DPDP Encrypted)');
 
             var now = new Date(Date.now() + 60 * 60 * 1000);
@@ -2482,7 +2519,7 @@
                     if (permission === 'granted') {
                         showToast('success', 'Reminders Enabled! 🔔', 'You will receive instant alerts for booking updates.', 4000);
                         new Notification('Kroovo Advisory Alert', {
-                            body: 'Booking alerts and expert notifications enabled in Google Cloud backend.',
+                            body: 'Booking alerts and expert consultation notifications enabled.',
                             icon: 'logo.png'
                         });
                     }
